@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr){
+                let answer;
+                let min = Number.MAX_SAFE_INTEGER;
+                let sum = 0;
+                for(let i of arr) {
+                    if(arr[i] % 2 != 0) {
+                        sum += arr[i]
+                        min = min > arr[i] ? arr[i] : min
+                    }
+                } 
+                answer = (sum + '<br/>' + min)
+                return answer
+            }  
+            arr=[12, 77, 38, 41, 53, 92, 85];
+            console.log(solution(arr));
+            document.write(solution(arr));
+        </script>
+    </body>
+</html>
+
+
+<!-- for(let i of arr) 배열의 순환 방법 -->
+

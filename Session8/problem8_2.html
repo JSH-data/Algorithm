@@ -1,0 +1,52 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n){
+                let answer = parseInt(5/2);
+                function self(L) {
+                    let remainder = L%2;
+                    let quotient = parseInt(L/2);
+                    if(quotient === 1) {
+                        console.log(quotient)
+                        console.log(remainder)
+                    } else {
+                        self(quotient);
+                        console.log(remainder);
+                    }
+                }
+                self(11)
+            }
+            solution(11);
+        </script>
+    </body>
+</html> -->
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n){
+                let answer = "";
+                function self(L) {
+                    if(L === 0) {
+                        return;
+                    } else {
+                        self(parseInt(L/2));
+                        answer += (L%2);
+                    }
+                }
+                self(n)
+                console.log(answer);
+            }
+            solution(11);
+        </script>
+    </body>
+</html>

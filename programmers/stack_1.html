@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(progresses, speeds) {
+            var answer = [];
+            while(progresses.length > 0) {
+                console.log(progresses[0]);
+                for(let i=0; i<progresses.length; i++) {
+                    progresses[i] += speeds[i];
+                }
+                if(progresses[0] >= 100) {
+                    let deployNum = 0;
+                    for(let i=0; i<progresses.length; i++) {
+                        if(progresses[i] >= 100) {
+                            deployNum ++;
+                        } else break;
+                    }
+                    answer.push(deployNum);
+                    progresses.splice(0, deployNum);
+                    speeds.splice(0, deployNum);
+                }
+            }
+            return answer;
+        }
+
+        let progresses1 = [95, 90, 99, 99, 80, 99];
+        let speeds2 = [1, 1, 1, 1, 1, 1]
+        let progresses=[93, 30, 55];
+        let speeds=[1, 30, 5];
+        console.log(solution(progresses, speeds));
+    </script>
+</body>
+</html>

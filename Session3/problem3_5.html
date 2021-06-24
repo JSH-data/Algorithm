@@ -1,0 +1,74 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){
+                let answer = ''
+                let len = s.length
+                let char = '';
+                let num = 0;
+                for(let i = 0; i < len; i++) {
+                    if(s[i] !== char) {
+                        if(num > 1) {
+                            answer = answer + char + num
+                        } else {
+                            answer = answer + char
+                        }
+                        num = 1;
+                        char = s[i];
+                    } else {
+                        num ++;
+                    }
+                    if(i === len-1) {
+                        if(num > 1) {
+                            answer = answer + char + num
+                        } else {
+                            answer = answer + char
+                        }
+                    }
+                }
+                return answer
+            }
+            let str="KKHSSSSSSSEEE";
+            console.log(solution(str));
+        </script>
+    </body>
+</html> -->
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){
+                let answer = ''
+                s = s + ' ';
+                let len = s.length;
+                let char = '';
+                let num = 1;
+                for(let i = 0; i < len - 1; i++) {
+                    if(s[i] !== s[i+1]) {
+                        answer += s[i];
+                        if(num > 1) {
+                            answer += num;
+                        }
+                        num = 1;
+                    } else {
+                        num ++;
+                    }
+                }
+                return answer
+            }
+            let str="KKHSSSSSSSEEE";
+            console.log(solution(str));
+        </script>
+    </body>
+</html>
+
+한자리 늘리기...

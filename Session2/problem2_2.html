@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr){         
+                let answer = 0;
+                let studentHeight;
+                for(let x of arr) {
+                    if(answer === 0) {
+                        studentHeight = x;
+                        answer ++;
+                    } else {
+                        if(x > studentHeight) {
+                            studentHeight = x;
+                            answer ++;
+                        }                        
+                    }
+                }
+                return answer;
+            }
+
+            let arr=[130, 135, 148, 140, 145, 150, 150, 153];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>
+
+
+제발 1번 따로 선언하자...

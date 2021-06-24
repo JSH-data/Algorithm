@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s, t){
+                let answer = [];
+                let dis = 100;
+                let len = s.length;
+                for(let i = 0; i < len; i++) {
+                    if(s[i] === t) {
+                        answer[i] = dis = 0;    
+                    } else {
+                        dis ++;
+                        answer[i] = dis;
+                    }
+
+                }
+                dis = 100;
+                for(let i = len-1; i >= 0; i--) {
+                    if(s[i] === t) {
+                        answer[i] = dis = 0;
+                    } else {
+                        dis ++;
+                        answer[i] = Math.min(dis, answer[i]);
+                    }
+                }
+                return answer
+            }
+            
+            let str="teachermode";
+            console.log(solution(str, 'e'));
+        </script>
+    </body>
+</html>
+
+<!-- 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s, t){
+                let answer = [];
+                let len = s.length
+                let dis = 1000;
+                for(let i = 0; i < len; i++) {
+                    if(s[i] === t) {
+                        dis = 0;
+                        answer[i] = dis;
+                    } else {
+                        dis ++;
+                        answer[i] = dis; 
+                    }
+                }
+                dis = 1000;
+                for(let i = len-1; i >= 0; i--) {
+                    if(s[i] === t) {
+                        dis = 0;
+                    } else {
+                        dis ++;
+                        answer[i] = dis > answer[i] ? answer[i] : dis;
+                    }
+                }
+                return answer
+            }
+            
+            let str="teachermode";
+            console.log(solution(str, 'e'));
+        </script>
+    </body>
+</html> -->
+
+큰 수를 이용하면서 역 순회방식.... Math.min

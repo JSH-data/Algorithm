@@ -1,0 +1,61 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n, k){
+                let answer = '';
+                let prince = Array.from({length:n}, (v, i)=>i+1);
+                let k_num = 0;
+                while(prince.length > 1) {
+                    k_num ++;
+                    if(k_num != k) {
+                        prince.push(prince.shift())
+                    } else {
+                        prince.shift()
+                        k_num = 0;
+                    }
+                }
+                answer = prince[0];
+                return answer;
+            }
+
+            console.log(solution(8, 3));
+        </script>
+    </body>
+</html> -->
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n, k){
+                let answer = '';
+                let prince = Array.from({length:n}, (v, i)=>i+1);
+                let k_num = 1;
+                while(prince.length > 1) {
+                    for(let i=0; i<prince.length; i++) {
+                        if(k_num != k) {
+                            prince.push(prince.shift());
+                            k_num++;
+                        } 
+                        else {
+                            prince.shift();
+                            k_num = 1;
+                        }
+                    }
+                }
+                answer = prince[0]
+                return answer;
+            }
+
+            console.log(solution(8, 3));
+        </script>
+    </body>
+</html>

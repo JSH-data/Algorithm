@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       
+
+        function solution(clothes) {
+            var answer = 0;
+            let style = new Map();
+            for(let x of clothes) {
+                if(style.has(x[1])) {
+                    style.set(x[1], style.get(x[1]) + 1)
+                } else {
+                    style.set(x[1], 1);
+                }
+            }
+            let tmp = [];
+            for(let x of style) {
+                tmp.push(x[1]);
+            }
+            answer = tmp.reduce((acc, cur, i) => {return acc * (cur+1);}, 1) - 1;
+            return answer;
+        }
+        let clothess = [["yellowhat", "headgear"], ["bluesunglasses", "eyewear"], ["green_turban", "headgear"]];
+        let clothes = [["crowmask", "face"], ["bluesunglasses", "face"], ["smoky_makeup", "face"]];
+        console.log(solution(clothes))
+    </script>
+</body>
+</html>

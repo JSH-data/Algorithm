@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){  
+                let answer = "";
+                let len = Number.MIN_SAFE_INTEGER;
+                let arr = [answer, len];
+                for(x of s) {
+                    arr = x.length > arr[1] ? [x, x.length] : arr;  
+                }
+                return arr[0];
+            }
+            let str=["teacher", "time", "studasdasdent", "beautiful", "good"];
+            console.log(solution(str));
+        </script>
+    </body>
+</html>

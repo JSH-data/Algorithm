@@ -1,0 +1,55 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){  
+                let answer = "";
+                let tmp;
+                let upper = /[A-Z]/;
+                //var upper = new RegExp("[A-Z]");
+                for(x of s) {
+                    tmp = upper.exec(x)
+                    if(tmp === null) {
+                        answer += x.toUpperCase();
+                    } else {
+                        answer += x.toLowerCase();
+                    }
+                }
+                return answer;
+            }
+            console.log(solution("AbCdEf"));
+        </script>
+    </body>
+</html> -->
+
+
+<!-- 정규 표현식을 활용한 대소문자 판별 변환 -->
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){  
+                let answer = "";
+                for(x of s) {
+                    if(x === x.toLowerCase()) {
+                        answer += x.toUpperCase();
+                    } else {
+                        answer += x.toLowerCase();
+                    }
+                }
+                return answer;
+            }
+            console.log(solution("AbCdEf"));
+        </script>
+    </body>
+</html>
+
+<!-- 정규 표현식을 사용하지 않고 해결하는 방법입니다. -->

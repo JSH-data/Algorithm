@@ -1,0 +1,73 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(target, arr){
+                let answer;
+                let len = arr.length;
+                let e = len-1;
+                let s = 0;
+                arr.sort((a,b) => a-b)
+                let n = 5;
+                while(1) {
+                    let sum = Math.floor((s+e)/2)
+                    if(arr[sum] === target) {                        
+                        answer = sum+1;
+                        break;
+                    }
+                    else if(arr[sum] > target) {
+                        e = sum-1;
+                    }
+                    else {
+                        s = sum+1;
+                    }
+                }
+                return answer;
+            }
+
+            let arr=[23, 87, 65, 12, 57, 32, 99, 81];
+            console.log(solution(32, arr));
+        </script>
+    </body>
+</html> -->
+
+
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(target, arr){
+                let answer;
+                let sortArr = arr.sort((a, b) => a-b);
+                let s = 0;
+                let e = arr.length - 1;
+                while(e >= s) {
+                    let mid = parseInt((e+s)/2);
+                    if(sortArr[mid] < target) {
+                        s = mid + 1;
+                    } else if (sortArr[mid] > target) {
+                        e = mid - 1;
+                    } else {
+                        answer = mid + 1;
+                        break;
+                    }
+                }
+
+                return answer;
+            }
+
+            let arr=[23, 87, 65, 12, 57, 32, 99, 81];
+            console.log(solution(32, arr));
+        </script>
+    </body>
+</html>
+
+

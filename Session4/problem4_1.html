@@ -1,0 +1,82 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n, arr){
+                let answer, tmp;
+                let maxArr = []; 
+                let arrS = [];
+                let max = 0;
+                let sum = 0;
+                for(let i = 0; i < n; i++) {
+                    arrS[i] = String(arr[i]);
+                    tmp = arrS[i].split('')
+                    for(let y of tmp) {
+                        sum += parseInt(y);
+                    }
+                    maxArr.push(sum);
+                    sum = 0;
+                }
+                for(let i = 0; i < n; i++) {
+                    if(max > maxArr[i]) {
+                        max = max;
+                    } else if(max === maxArr[i]) {
+                        key = arr[i] > arr[key] ? i : key; 
+                    } else {
+                        max = maxArr[i];
+                        key = i;
+                    }
+                } 
+                answer = arr[key];
+                return answer
+            }
+            
+            let arr=[128, 460, 603, 40, 521, 137, 123];
+            console.log(solution(7, arr));
+        </script>
+    </body>
+</html>
+
+리듀스를 사용하는 방법,
+나누기연산을 활용하는 방법,
+ -->
+
+
+
+<!-- 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n, arr){
+                let answer = "";
+                let tmp = ""
+                let max = 0;
+                for(let i of arr) {
+                    tmp = i.toString().split('').reduce((a,b)=>a + Number(b), 0)
+                    if(tmp > max) {
+                        answer = i;
+                        max = tmp;
+                    }
+                    if(max === tmp) answer = i;
+                }                
+                return answer
+            }
+            
+            let arr=[128, 460, 603, 40, 521, 137, 123];
+            console.log(solution(7, arr));
+        </script>
+    </body>
+</html>
+
+리듀스를 사용하는 방법,
+나누기연산을 활용하는 방법, -->
+
+
+

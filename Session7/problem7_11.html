@@ -1,0 +1,63 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function discNum(songs, mid) {
+                let sum = 0;
+                let cnt = 1;
+                for(let i=0; i < songs.length; i++) {
+                    if(sum + songs[i] > mid) {
+                        cnt ++;
+                        sum = songs[i];
+                    } else sum += songs[i]
+                }
+                return cnt;
+            }
+
+            function solution(m, songs){
+                let answer;
+                let s = Math.max(...songs);
+                let e = songs.reduce((a, b) => a+b, 0);
+                while(e >= s) {
+                    let mid = parseInt((e+s)/2);
+                    if(discNum(songs, mid) <= m) {
+                        answer = mid;
+                        e = mid - 1;
+                    } else {
+                        s = mid + 1
+                    }
+                }
+                return answer;
+            }
+
+            let arr=[1, 2, 3, 4, 5, 6, 7, 8, 9];
+            console.log(solution(3, arr));
+        </script>
+    </body>
+</html> -->
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function discNum(songs, mid) {
+        
+            }
+
+            function solution(m, songs){
+                let answer;
+                return answer;
+            }
+
+            let arr=[1, 2, 3, 4, 5, 6, 7, 8, 9];
+            console.log(solution(3, arr));
+        </script>
+    </body>
+</html>

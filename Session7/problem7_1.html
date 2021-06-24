@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr){
+                let answer = arr;
+                for(let i=0; i<answer.length; i++) {
+                    let idx = i;
+                    for(let j=i+1; j<answer.length; j++) {
+                        idx = answer[idx] > answer[j] ? j : idx;
+                    }
+                    //let tmp = answer[idx];
+                    //answer[idx] = answer[i];
+                    //answer[i] = tmp;   
+                    [answer[idx], answer[i]] = [answer[i], answer[idx]];
+                }
+
+                return answer;
+            }
+
+            let arr=[13, 5, 11, 7, 23, 15];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>

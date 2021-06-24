@@ -1,0 +1,79 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n, r){         
+                let answer = 0;
+                function DFS(n, r) {
+                    if(n < r) {
+                        return
+                    } else if(n === 1 || r === 0) {
+                        answer ++;
+                        return
+                    } else {
+                        DFS(n-1, r-1);
+                        DFS(n-1, r);
+                    }
+                }
+                DFS(n, r);
+                return answer;
+            }
+
+            console.log(solution(33, 19));
+        </script>
+    </body>
+</html> -->
+
+
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n, r){         
+                let answer = 0;
+                function DFS(n, r) {
+                    if(n === r || r === 0) {
+                        return 1
+                    } else {
+                        return DFS(n-1, r-1) + DFS(n-1, r);
+                    }
+                }
+                answer = DFS(n, r);
+                return answer;
+            }
+
+            console.log(solution(33, 19));
+        </script>
+    </body>
+</html> -->
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n, r){         
+                let answer = 0;
+                let arr = Array.from(Array(35), ()=>Array(35).fill(0));
+                function DFS(n, r) {
+                    if(arr[n][r] > 0) return arr[n][r];
+                    if(n === r || r === 0) return 1
+                    else return arr[n][r] = DFS(n-1, r-1) + DFS(n-1, r);
+                
+                }
+                answer = DFS(n, r);
+                return answer;
+            }
+
+            console.log(solution(33, 19));
+        </script>
+    </body>
+</html>

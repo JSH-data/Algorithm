@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(array, commands) {
+            var answer = [];
+            let i = 0;
+            while(i < commands.length) {
+                let seg = array.slice(commands[i][0]-1, commands[i][1]);
+                seg.sort((a, b) => a - b);
+                answer.push(seg[commands[i][2]-1]);
+                i++;
+            }
+            return answer;
+        }
+        let array = [1, 5, 2, 6, 3, 7, 4];
+        let commands = [[2, 5, 3], [4, 4, 1], [1, 7, 3]];
+        console.log(solution(array, commands))
+    </script>
+</body>
+</html>

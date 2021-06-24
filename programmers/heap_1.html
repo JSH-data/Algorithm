@@ -1,0 +1,80 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(jobs) {
+            var answer = 0;
+            let arr =[];
+            let copied = JSON.parse(JSON.stringify(jobs))
+            copied.shift();
+            copied.sort((a, b) => a[1]-b[1]);
+            arr.push(jobs[0][1]);
+            let max = arr[0];
+            for(let i=0; i<copied.length; i++) {
+                if(max <= copied[i][0]) arr.push(copied[i][1])
+                else {
+                    let tmp = max - copied[i][0] + copied[i][1];
+                    arr.push(tmp);
+                    max += copied[i][1]; 
+                }
+            }
+            answer = arr.reduce((a,b)=>a+b,0)/jobs.length;
+            return answer; 
+        }
+
+        let jobs = [[0, 3], [1, 9], [2, 6]];
+        console.log(solution(jobs))
+    </script>
+</body>
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(jobs) {
+            var answer = 0;
+            let i = 0;
+            let time = 0;
+            jobs.sort((a, b) => {
+                if(a[0]===b[0]) return a[1] -b[1]
+                else return a[0]-b[0]
+            });
+            let queue = [];
+            while(jobs.length > i || queue.length !== 0) {
+                if(jobs.length > i && time >= jobs[i][0]) {
+                    queue.push(jobs[i++]);
+                    queue.sort((a, b) => a[1] - b[1]);
+                    continue;
+                }
+                if(queue.length !== 0) {
+                    time += queue[0][1];
+                    answer += time - queue[0][0];
+                    queue.shift();
+                } else {
+                    time = jobs[i][0];
+                }
+            }
+            return parseInt(answer/jobs.length); 
+        }
+
+        let jobs = [[0, 3], [1, 9], [2, 6]];
+        console.log(solution(jobs))
+    </script>
+</body>
+</html>

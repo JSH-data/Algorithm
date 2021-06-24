@@ -1,0 +1,35 @@
+<html><head>
+    <meta charset="UTF-8">
+    <title>출력결과</title>
+</head>
+<body>
+    <script>
+        function solution(arr){
+            let answer = 0;
+            const row = arr.length;
+            const col = arr[0].length
+            let tmp = [];
+            let mento, menti;
+            let cnt = 0;
+            for(let a=1;a<=col;a++) {
+                for(let b=1;b<=col;b++){
+                    for(let i=0;i<row;i++) {
+                        for(let j=0;j<col;j++) {
+                            if(arr[i][j] === a) mento = j;
+                            if(arr[i][j] === b) menti = j;
+                        }
+                        if(mento < menti) {
+                            cnt++;
+                        }
+                    }
+                    if(cnt === row) answer++;
+                    cnt = 0;
+                }
+            }
+            return answer
+        }
+        let arr=[[3, 4, 1, 2], [4, 3, 2, 1], [3, 1, 4, 2]];
+        console.log(solution(arr));
+    </script>
+
+</body></html>

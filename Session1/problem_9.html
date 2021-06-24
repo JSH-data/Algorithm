@@ -1,0 +1,84 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){
+                let answer;
+                answer = s.replace(/A/g, "#")
+                return answer;
+            }
+            
+            let s="BANANA";
+            console.log(solution(s));
+        </script>
+    </body>
+</html>
+
+정규 표현식을 이용한 변환
+/A/g 대문자 A를 g(전역)로 찾아 바꾼다. 
+replace는 첫번째 변환을 마치면 종료되기 때문에 위와 같이 전체를 찾아 바꿔주어야합니다.  -->
+
+<!-- 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(str){
+                let answer = "";
+                for(x of str) {
+                    if(x === "A") answer += "#";
+                    else answer += x;
+                }
+                return answer;
+            }
+            
+            let str="BANANA";
+            console.log(solution(str));
+        </script>
+    </body>
+</html> -->
+
+
+<!-- string의 순환을 이용한 변환 
+배열과 마찬가지로 문자열도 For문의 순환이 가능합니다.  -->
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(str){
+                let answer;
+                String.prototype.repalceALL = function(a, b) {
+                    return this.split(a).join(b);
+                }
+                
+                answer = str.repalceALL("A", "#");
+
+                return answer;
+            }
+            
+            let str="BANANA";
+            console.log(solution(str));
+        </script>
+    </body>
+</html>
+
+
+
+<!-- String prototype 메서드 추가
+
+새로운 replaceAll이라는 메서드를 생성하여 모두 변환합니다. 
+
+split으로 기존의 문자열을 변경시키고 싶은 값을 기준으로 쪼개준 뒤(split), 변경될 값으로 이어줍니다.(Join) -->
+
+

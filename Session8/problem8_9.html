@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(m, arr){
+                let answer = Number.MAX_SAFE_INTEGER;
+                let tmp = [];
+                let len = arr.length;
+                function DFS(v, sum) {
+                    if(sum > m && v >= answer) return;
+                    if(sum === m) {
+                        answer = Math.min(answer, v);
+
+                    } else {
+                        for(let i=0; i<len; i++) {
+                            DFS(v+1, sum+arr[i]);
+                        }
+                    }
+                }
+                DFS(0, 0);
+                return answer;
+            }
+
+            let arr=[1, 2, 5];
+            console.log(solution(19, arr));
+        </script>
+    </body>
+</html>
+
+

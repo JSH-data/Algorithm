@@ -1,0 +1,64 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(size, arr){
+                let answer = Array.from({length:size}, (val, i) => 0);
+                let len = arr.length;
+                arr.forEach(x => {
+                    let check = -1;
+                    for(let i=0; i<size; i++) if(answer[i] === x) check = i;
+                    if(check === -1) {
+                        for(let i=size-1; i>0; i--) {
+                            answer[i] = answer[i-1];
+                        }
+                    } else {
+                        for(let i=check; i>0; i--) {
+                            answer[i] = answer[i-1];
+                        }
+                    }
+                    answer[0] = x;
+                })
+                return answer;
+            }
+
+            let arr=[1, 2, 3, 2, 6, 2, 3, 5, 7];
+            console.log(solution(5, arr));
+        </script>
+    </body>
+</html> -->
+
+
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(size, arr){
+                let answer = Array.from({length:size}, ()=>0);
+                arr.forEach(x => {
+                    let check = -1;
+                    for(let i=0; i<size; i++) if(x === answer[i]) check = i; 
+                    if(check === -1) {
+                        for(let i=size-1; i>0; i--) answer[i] = answer[i-1];
+                        answer[0] = x;
+                    } else {
+                        for(let i=check; i>0; i--) answer[i] = answer[i-1];
+                        answer[0] = x;
+                    }
+                })
+                return answer;
+            }
+
+            let arr=[1, 2, 3, 2, 6, 2, 3, 5, 7];
+            console.log(solution(5, arr));
+        </script>
+    </body>
+</html>

@@ -1,0 +1,50 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n){
+                let answer = [];
+                function self(arr, a) {
+                    if(a === 1) {
+                        arr.unshift(a);
+                        console.log(arr);
+                    }
+                    else {
+                        arr.unshift(a);
+                        return self(arr, a-1)
+                    };
+                }
+                self(answer, 3);
+            }
+            solution(3);
+        </script>
+    </body>
+</html> -->
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n){
+                function self(a) {
+                    if(a === 1) {
+                        console.log(1);
+                    }
+                    else {
+                        self(a-1);
+                        console.log(a)
+                    }
+                }
+                self(n);
+            }
+            solution(3);
+        </script>
+    </body>
+</html>

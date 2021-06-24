@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(numbers, target) {
+            var answer = 0;
+            let len = numbers.length;
+            function DFS(n, sum) {
+                if(n === len) {
+                    if(sum === target) answer ++;
+                    return;
+                } else {
+                    DFS(n+1, sum+numbers[n]);
+                    DFS(n+1, sum-numbers[n]);
+                }
+            }
+            DFS(0, 0);
+            return answer;
+        }
+        let numbers = [1, 1, 1, 1, 1];
+        let target = 3;
+        console.log(solution(numbers, target));
+    </script>
+</body>
+</html>

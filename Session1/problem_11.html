@@ -1,0 +1,49 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){         
+                let answer;
+                answer = s.match(/[A-Z]/g);
+                return answer.length;
+            }
+
+            let str="KorAAAeaTimeGood";
+            console.log(solution(str));
+        </script>
+    </body>
+</html> -->
+
+
+<!-- match 함수와 정규표현식을 사용하여 대문자를 걸러냅니다. -->
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){         
+                let answer = 0;
+                let num;
+                for(x of s) {
+                    num = x.charCodeAt();
+                    if(num >= 65 && num <= 90) answer ++;
+                }
+                return answer;
+            }
+            let str="KorAAAeaTimeGood";
+            console.log(solution(str));
+        </script>
+    </body>
+</html>
+
+
+<!-- 아스키 코드 문자로 변환하여 계산합니다. charCodeAt() 사용
+
+대문자는 65~90 소문자는 97~122 -->

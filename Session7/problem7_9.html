@@ -1,0 +1,63 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(times){
+                let answer = 0;
+                let queue = [];
+                times.sort((a,b) => a[0]-b[0]);
+                for(let x of times) {
+                    queue.push(x)
+                    for(let i=0; i<queue.length-1; i++) {
+                        if(queue[i][1] <= x[0]) {
+                            queue.splice(i,1);
+                        }
+                    }
+                    answer = Math.max(answer, queue.length);
+                }
+                return answer;
+            }
+
+            let arr=[[14, 18], [12, 15], [15, 20], [20, 30], [5, 14]];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html> -->
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(times){
+                let answer = 0;
+                let arr = [];
+                for(let x of times) {
+                    arr.push([x[0], "s"]);
+                    arr.push([x[1], "e"]);
+                }
+                arr.sort((a, b) => {
+                    if(a[0] === b[0]) return a[1].charCodeAt()-b[1].charCodeAt();
+                    else return a[0]-b[0];
+                })   
+                let cnt = 0;
+                for(let x of arr) {
+                    if(x[1] === "s") cnt++;
+                    else cnt --;
+
+                    answer = Math.max(answer, cnt);
+                }       
+                return answer;
+            }
+
+            let arr=[[14, 18], [12, 15], [15, 20], [20, 30], [5, 14]];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>

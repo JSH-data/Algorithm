@@ -1,0 +1,63 @@
+<!-- <html><head>
+    <meta charset="UTF-8">
+    <title>출력결과</title>
+</head>
+<body>
+    <script>
+        function solution(n, k, card){
+            let answer = 0;
+            let fir, sec, thr;
+            let cnt = 0;
+            let len = card.length;
+            let tmp = new Set();
+            for(let x=0; x<len; x++) {
+                fir = card[x];
+                for(let y = x+1; y<len; y++) {
+                    sec = card[y];
+                    for(let z=y+1; z<len; z++) {
+                        thr = card[z];
+                        answer = fir + sec + thr;
+                        cnt ++;
+                        tmp.add(answer);
+                    }
+                }
+            }
+            let ansArr = Array.from(tmp).sort((a, b) => b - a);
+            answer = ansArr[k-1];
+            return answer;
+        }
+        
+        let arr=[13, 15, 34, 23, 45, 65, 33, 11, 26, 42];
+        console.log(solution(10, 3, arr));
+    </script>
+
+</body></html> -->
+
+
+<html><head>
+    <meta charset="UTF-8">
+    <title>출력결과</title>
+</head>
+<body>
+    <script>
+        function solution(n, k, card){
+            let answer ='';
+            let tmp = new Set();
+            let cnt = 0;
+            card.sort((a, b) => b - a)
+            for(let x=0; x < n; x++) {
+                for(let y=x+1; y < n; y++) {
+                    for(let z=y+1; z < n; z++) {
+                        answer = card[x] + card[y] + card[z]
+                        tmp.add(answer);
+                    }
+                }
+            }
+            console.log(Array.from(tmp).sort((a, b) => b - a)[k-1]);
+        }
+        
+        let arr=[13, 15, 34, 23, 45, 65, 65, 33, 11, 26, 42];
+        console.log(solution(10, 3, arr));
+    </script>
+
+</body></html>

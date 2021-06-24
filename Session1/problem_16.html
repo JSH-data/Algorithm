@@ -1,0 +1,47 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){  
+                let answer = "";
+                for(let i = 0; i < s.length; i++) {
+                    if(s.indexOf(s[i]) === i) answer += s[i]
+                }
+                return answer;
+            }
+            console.log(solution("ksekkset"));
+        </script>
+    </body>
+</html> -->
+
+
+<!-- str.indexOf() 의 사용을 이용한 해결  첫 번째로 발견한 문자 인덱스 반환 배열도 마찬가지-->
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){  
+                let answer = 0;
+                let pos = s.indexOf('k');
+
+                while(pos != -1) {
+                    answer ++;
+                    pos = s.indexOf('k', pos + 1);
+                }
+                return answer;
+            }
+            console.log(solution("ksekkset"));
+        </script>
+    </body>
+</html>
+
+
+특정 문자의 갯수를 구합니다. 

@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){  
+                let answer;
+                let mid = Math.floor(s.length/2);
+                if(s.length % 2 === 0) {
+                    answer = s.substring(mid - 1, mid + 1)
+                } else {
+                    answer = s.substr(mid, 1)
+                }
+                return answer;
+            }
+            console.log(solution("stssudy"));
+        </script>
+    </body>
+</html>
+
+
+<!-- substr(시작 인덱스, 추출한 문자 갯수)과 substring(시작 인덱스, 종료 인덱스)의 사용 -->

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(priorities, loc) {
+            var answer = 0;
+            let maxArr = priorities.slice().sort((a,b) => b-a);
+            for(let i=0; i<priorities.length; i++) {
+                priorities[i] = [priorities[i], i];
+            }
+            let num = 0
+            while(priorities.length != 0) {
+                if(priorities[0][0] < maxArr[num]) {
+                    priorities.push(priorities[0]);
+                    priorities.shift();
+                } else {
+                    num ++;
+                    console.log(priorities[0])
+                    if(priorities[0][1] === loc) {            
+                        answer = num;
+                        break;
+                    }    
+                    priorities.shift();
+                }
+            }
+            return answer;
+        }
+        let priorities = [1, 1, 9, 1, 1, 1];
+        let loc = 0;
+        console.log(solution(priorities, loc));
+    </script>
+</body>
+</html>
+
+<!-- while(priorities.length != 0) {
+    if(priorities[0] < priorities[1]) {
+        priorities.push(priorities[0]);
+        priorities.unshift();
+    } else {
+        priorities.unshift();
+    }
+} -->
+<!-- 
+let priorities1 = [1, 1, 9, 1, 1, 1];
+let location1w = 0; -->

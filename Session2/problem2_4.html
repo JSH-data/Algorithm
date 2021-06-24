@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr){         
+                let point = 0;
+                let sum_answer = 0;
+                //let isAddPoint = false;
+                for(let x of arr) {
+                    if(x === 1) {
+                        //isAddPoint = true;
+                        point ++;
+                        sum_answer += point;    
+                    } else {
+                        point = 0;
+                    }
+                }
+                return sum_answer;
+            }
+
+            let arr=[1, 1, 1, 1, 1, 0, 0, 1, 1, 0];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>

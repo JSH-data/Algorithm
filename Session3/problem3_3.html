@@ -1,0 +1,37 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(str){
+                let answer = "";
+                answer = parseInt(str.replace(/[^0-9]/g, ''));
+                return answer
+            }
+            let str="000g0e123n2T0s3118eSoft";
+            console.log(solution(str));
+        </script>
+    </body>
+</html> -->
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(str){
+                let answer = ""
+                str = str.toLowerCase();
+                answer = parseInt(str.replace(/[a-z]/g, ''));
+                return answer;
+            }
+            let str="000g0e123n2T0s3118eSoft";
+            console.log(solution(str));
+        </script>
+    </body>
+</html>

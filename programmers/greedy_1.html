@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(n, lost, reserve) {
+            var answer = 0;
+            let student = Array.from({length:n}, (value, index) => 0); 
+            for(let x of lost) student[x-1]--;
+            for(let x of reserve) student[x-1]++; 
+            for(let i=0; i<n; i++) {
+                if(student[i] === -1) {
+                    if(student[i-1] === 1){
+                        student[i-1]--;
+                        student[i]++;
+                    } 
+                    else if(student[i+1] === 1) {
+                        student[i+1]--;
+                        student[i]++;
+                    } else continue;
+                }
+            }
+            for(let x of student) {
+                if(x >= 0) answer ++;
+            }
+            return answer;
+        }
+        let n = 5;
+        let lost = [2, 4]
+        let reserve = [3];
+        console.log(solution(n, lost, reserve))
+    </script>
+</body>
+</html>

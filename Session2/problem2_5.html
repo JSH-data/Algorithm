@@ -1,0 +1,67 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr){  
+                let answer = [];
+                let isSame = false;
+                let rank = 0;
+                let i = 0;
+                for(let x of arr) {
+                    for(let y of arr) {
+                        if(x < y) {
+                            rank ++;
+                        } else if(x === y && isSame === false) {
+                            isSame = true;
+                            rank ++;  
+                        } else {
+                        }
+                    }
+                    isSame = false;
+                    answer[i] = rank;
+                    i ++;
+                    rank = 0;
+                }
+                return answer;
+            }
+
+            let arr=[87, 87, 89, 92, 100, 76, 100, 66, 89, 89];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html> -->
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr){  
+                const len = arr.length;
+                let answer = Array.from({length:len}, ()=>1);
+                for(let i = 0; i < len; i++) {
+                    for(let x of arr) {
+                        if(x > arr[i]) {
+                            answer[i] ++;
+                        }
+                    }
+                }
+                return answer;
+            }
+            let arr=[87, 89, 92, 100, 76];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>
+
+
+Array.from(길이, 값) 활용!
+
+* 참고 자바스크립트에서 배열은 객체, 객체에 Array 메서드와 iterator, length속성을 넣어준것이 배열이다!
+

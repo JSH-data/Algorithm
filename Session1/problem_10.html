@@ -1,0 +1,44 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s, t){
+                let answer = 0;
+                for(x of s) {
+                    if(x === t) answer += 1;
+                }
+                return answer;
+            }
+            
+            let str="COMPUTERPROGRAMMING";
+            console.log(solution(str, 'R'));
+        </script>
+    </body>
+</html> -->
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s, t){
+                let answer = s.split(t).length;
+                return answer - 1;
+            }
+            
+            let str="COMPUTERPROGRAMMINGR";
+            console.log(solution(str, 'R'));
+        </script>
+    </body>
+</html>
+
+
+
+<!-- split을 활용! 문자열의 마지막 끝에 문자가 있다고 하더라도 
+이는 빈 문자열이 하나 추가되어 배열에 저장되기 때문에 문제 없이 사용이 가능합니다.  -->

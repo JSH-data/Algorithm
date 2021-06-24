@@ -1,0 +1,45 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){         
+                let answer="";
+                answer = s.toUpperCase();
+                return answer;
+            }
+
+            let str="ItisTimeToStudy";
+            console.log(solution(str));
+        </script>
+    </body>
+</html> -->
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){         
+                let answer="";
+                let num;
+                for(let x of s) {
+                    num = x.charCodeAt();
+                    if(num >= 97 && num <= 122) answer += String.fromCharCode(num - 32);
+                    else answer += x                    
+                }
+                return answer;
+            }
+
+            let str="ItisTimeToStudy";
+            console.log(solution(str));
+        </script>
+    </body>
+</html>
+
+
+<!-- 아스키코드를 활용하여 변환합니다. -->

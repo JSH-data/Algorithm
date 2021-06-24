@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr){  
+                let answer;
+                let sumRow = sumCol = sumCross1 = sumCross2 = 0;  
+                let len = arr[0].length;
+                for(let i = 0; i < len; i++) {
+                    for(let j = 0; j < len; j++) {
+                        sumRow += arr[i][j];
+                        sumCol += arr[j][i];
+                        answer = sumRow > sumCol ? sumRow : sumCol;  
+                    }
+                    sumRow = sumCol = 0; 
+                    sumCross1 += arr[i][i];
+                    sumCross2 += arr[i][len - 1 - i];
+                }
+                //if(answer > sumCross1) {
+                //    answer = answer > sumCross2 ? answer : sumCross2
+                //} else{
+                //    answer = sumCross1 > sumCross2 ? sumCross1 : sumCross2
+                //}
+                answer = Math.max(sumRow, sumCol, sumCross1, sumCross2)
+                return answer
+            }
+
+            let arr=[[10, 13, 10, 12, 15], 
+                     [12, 39, 30, 23, 11],
+                     [11, 25, 50, 53, 15],
+                     [19, 27, 29, 37, 27],
+                     [19, 13, 30, 13, 19]];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>
+
+
+자바스크립트 연속 할당 방법 체크
+
+Math.max(값1, 값2...)
