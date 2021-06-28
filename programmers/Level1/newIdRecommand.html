@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(new_id) {
+            var answer = '';
+            new_id = new_id.toUpperCase();
+            new_id = new_id.replace(/[^A-Za-z0-9]+_+.+-/g, '');
+            console.log(new_id);
+            return answer;
+        }
+        const new_id = "...!@BaT#*..y.abcdefghijklm";
+        console.log(solution(new_id))
+    </script>
+</body>
+</html>

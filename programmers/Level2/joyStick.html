@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function continues(name) {
+            let repeat = 0; // 
+            for(let x of name) {
+                if(x != "A") break;
+                repeat ++;
+            }
+            return repeat;
+        }
+
+        function calc_diff(name, i) {
+            let diff = name.charCodeAt(i) - 65;
+            if(diff > 13) {
+                diff = 26 - diff
+            }
+            return diff;
+        }
+
+        function solution(name) {
+            const arr = [0];
+
+            const answer = [...name].reduce( (answer, crt, i) => {
+                if(crt === "A") { // 현재 A값이라면
+                    if(name[i-1] != "A") { // 이전이 A가 아니라면
+                        arr.push(continues(name.substring(i))-(i-1));
+                    }
+                    return answer + 1
+                }
+                return answer + calc_diff(name, i) + 1;
+            }, 0)
+
+            return answer - Math.max(...arr) - 1;
+        }
+        let name = "JEROEN";
+        let name2 = "JAN";
+        console.log(solution(name))
+    </script>
+</body>
+</html>

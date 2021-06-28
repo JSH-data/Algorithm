@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function solution(nums) {
+        var answer = 0;
+        let pocketSet = new Set();
+        for(let x of nums) if(!pocketSet.has(x)) pocketSet.add(x);
+        let pocketNum = nums.length / 2;
+        answer = pocketSet.size >= pocketNum ? pocketNum : pocketSet.size;
+        const arr = [...new Set(nums)]
+        console.log(arr)
+        return answer;
+    }
+    const nums = [3,3,3,2,2,4];
+    console.log(solution(nums))
+    </script>
+</body>
+</html>

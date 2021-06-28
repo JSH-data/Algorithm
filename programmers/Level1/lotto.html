@@ -1,0 +1,69 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(lottos, win_nums) {
+            var answer = [];
+            let win = new Set();
+            let rank = 0;
+            let miss = 0;
+            for(let x of win_nums) {
+                win.add(x);
+            }
+
+            for(let i=0; i<lottos.length; i++) {
+                if(lottos[i] !== 0) {
+                    if(win.has(lottos[i])) {
+                        rank ++;
+                    }
+                } else {
+                    miss ++;
+                }
+            }
+            let highest = 7 - rank - miss;
+            let lowest = 7 - rank;
+            if(highest >= 6) answer.push(6);
+            else answer.push(highest); 
+            answer.push(lowest = lowest > 5 ? 6 : lowest);
+            return answer;
+        }
+
+        let lottos = [44, 1, 0, 0, 31, 25];
+        let win_nums = [31, 10, 45, 1, 6, 19];
+
+        console.log(solution(lottos, win_nums))
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(lottos, win_nums) {
+            var rank = [6, 6, 5, 4, 3, 2, 1];
+            let minCount = lottos.filter((v) => win_nums.includes(v)).length;
+            let zeroCount = lottos.filter((v) => !v).length;
+            
+            return [rank[minCount+zeroCount], rank[minCount]];
+        }
+
+        let lottos = [44, 1, 0, 0, 31, 25];
+        let win_nums = [31, 10, 45, 1, 6, 19];
+
+        console.log(solution(lottos, win_nums))
+    </script>
+</body>
+</html>

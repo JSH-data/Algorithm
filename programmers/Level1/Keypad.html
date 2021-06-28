@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(numbers, hand) {
+            var answer = '';
+            let left = new Set([1,4,7]);
+            let right = new Set([3, 6, 9]);
+            let leftCrt = "*";
+            let rightCrt = "#";
+            for(let i=0; i<numbers.length; i++) {
+                if(numbers[i] === 0) numbers[i] = 11;
+                if(left.has(numbers[i])){
+                    answer += "L";
+                    leftCrt = numbers[i];
+                } 
+                else if(right.has(numbers[i])) {
+                    answer += "R";
+                    rightCrt = numbers[i];
+                } 
+                else {
+                    let lenL, lenR
+                    if(leftCrt === "*") {
+                        switch(numbers[i]) {
+                            case 2 : 
+                                lenL = 4;
+                                break;
+                            case 5 : 
+                                lenL = 3;
+                                break;
+                            case 8 : 
+                                lenL = 2;
+                                break;
+                            case 11 : 
+                                lenL = 1;
+                                break;
+                        }
+                    } 
+                    else {
+                        lenL = parseInt(Math.abs(leftCrt-numbers[i]) / 3) + (Math.abs(leftCrt-numbers[i]) % 3);
+                    }
+                    if(rightCrt === "#") {
+                        switch(numbers[i]) {
+                            case 2 : 
+                                lenR = 4;
+                                break;
+                            case 5 : 
+                                lenR = 3;
+                                break;
+                            case 8 : 
+                                lenR = 2;
+                                break;
+                            case 11 : 
+                                lenR = 1;
+                                break;
+                        }
+                    }
+                    else {
+                        lenR = parseInt(Math.abs(rightCrt-numbers[i]) / 3) + (Math.abs(rightCrt-numbers[i]) % 3);
+                    }
+                    
+                    if(lenR > lenL) {
+                        answer += "L";  
+                        leftCrt = numbers[i];
+                    } else if(lenR < lenL) {
+                        answer += "R";
+                        rightCrt = numbers[i];
+                    } else {
+                        if(hand === "right") {
+                            answer += "R";
+                            rightCrt = numbers[i];
+                        } else {
+                            answer += "L";
+                            leftCrt = numbers[i];
+                        }
+                    }
+                }
+            }
+            return answer;
+        }
+        let numbers = [7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2]
+        let hand = "left"
+        console.log(solution(numbers, hand))
+    </script>
+</body>
+</html>
