@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function primeNum(arr) {
+            let num = arr.reduce((a,b)=>a+b,0);
+            for(let i=2; i<=Math.sqrt(num); i++) {
+                if(num % i === 0) {
+                    return 0;
+                }
+            }
+            return 1;
+        }
+        
+        function solution(nums) {
+            let answer = 0;
+            let arr = [];
+            for(let a=0; a<nums.length; a++) {
+                for(let b=a+1; b<nums.length; b++) {
+                    for(let c=b+1; c<nums.length; c++) {
+                        arr.push([nums[a], nums[b], nums[c]]);
+                    }
+                }
+            }
+            console.log(arr)
+            for(let x of arr) {
+                if(primeNum(x)) answer ++;
+            }
+            return answer;
+        }
+        const nums = [1,2,7,6,4];
+        console.log(solution(nums))
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function devide(s) {
+            if(s.length === 0) return 0;
+            else {
+                let right = 0;
+                let left = 0;
+                let i = 0;
+                do {
+                    if(s[i] === "(") right++;
+                    else left++;
+                    i++;
+                } while(right !== left);
+                return [s.slice(0, i), s.slice(i, s.length)];
+            }
+        }
+
+        function checkPerfect(s) {
+            let arr = s.split("");
+            let stack = [];
+            for(let i=0; i<arr.length; i++) {
+                if(stack[stack.length-1] == arr[i] || stack.length === 0) {
+                    stack.push(arr[i]);
+                } else if(stack[stack.length-1] === "(" && arr[i] ===")") {
+                    stack.pop()
+                } else {
+                    stack.push(arr[i]);
+                }
+            }
+            if(stack.length === 0) return 1;
+            else return 0
+        }
+
+        function solution(p) {
+            var answer = '';
+            function DFS(str) {
+                if(checkPerfect(str)) return str;
+                let devidedArr = devide(str);
+                if(checkPerfect(devidedArr[0])) {
+                    if(devidedArr[1] === "") return devidedArr[0]; 
+                    else {
+                        let v = DFS(devidedArr[1]);
+                        return devidedArr[0] + v;
+                    }
+                }
+                else {
+                    let tmp = devidedArr[0].split("");
+                    tmp.pop();
+                    tmp.shift();
+                    for(let i=0; i<tmp.length; i++) {
+                        if(tmp[i] === "(") tmp[i] = ")";
+                        else tmp[i] = "(";
+                    }
+                    tmp = tmp.join("");
+                    return "("+ DFS(devidedArr[1]) +")" + tmp;
+                }
+            }
+            answer = DFS(p);
+            return answer;
+        }
+        const p = "(()())()"	
+        console.log(solution(p));
+    </script>
+</body>
+</html>
+
