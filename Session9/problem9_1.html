@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            
+
+            function solution(n, arr){  
+                let answer=0;
+                let edge = Array.from({length:n}, () => new Array(n).fill(0));
+                let set = new Set([0]);
+                for(let x of arr) {
+                    edge[x[0]-1][x[1]-1] = 1;
+                }
+                function DFS(a) {
+                    if(a === 4) {
+                        answer ++;
+                        return;
+                    }
+                    else {
+                        for(let i=0; i<n; i++) {
+                            if(edge[a][i] === 1) {
+                                if(!set.has(i)) {
+                                    set.add(i)
+                                    DFS(i);
+                                    set.delete(i);
+                                } 
+                            }
+                        }
+                    }
+                }
+                DFS(0);
+                
+                return answer;
+            }
+
+            let arr=[[1, 2], [1, 3], [1, 4], [2, 1], [2, 3], [2, 5], [3, 4], [4, 2], [4, 5]];
+            console.log(solution(5, arr));
+        </script>
+    </body>
+</html>
