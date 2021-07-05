@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(money, cost) {
+            var answer = -1;
+            let max = 0;
+            for(let j=0; j<cost.length; j++) {
+                let arr = [];
+                for(let i=j; i<cost.length; i++) {
+                    if(cost[i] > money) {
+                        break;
+                    } else {
+                        money -= cost[i]; 
+                        arr.push(i+1)
+                    }
+                }
+                max = arr.length > max ? arr.length : max;
+            }
+            answer = max;
+            return answer;
+        }
+        
+        
+        const money = [0, 900, 0, 200, 150, 0, 30, 50];
+        const cost = [245, 317, 151, 192]
+        console.log(solution(money, cost));
+    </script>
+</body>
+</html>

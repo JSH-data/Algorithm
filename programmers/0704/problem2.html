@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(block, board) {
+            var answer = -1;
+            let vertical = board.length;
+            let horizontal = board[0].length
+            let max = 0;
+
+            for(let i=0; i<vertical; i++) {
+                for(let j=0; j<horizontal; j++) {
+                    let copy = JSON.parse(JSON.stringify(board));
+                    if(block === 0) {
+                        if(i+2 < vertical){
+                            if(copy[i][j] === 0 && copy[i+1][j] === 0 && copy[i+2][j] === 0) {
+                                copy[i][j] = 1;
+                                copy[i+1][j] = 1;
+                                copy[i+2][j] = 1;
+                                let count = 0;
+                                for(let x of copy) {
+                                    if(!x.includes(0)) count ++;
+                                }
+                                max = max > count ? max : count;
+                            }
+                        }
+                    }
+
+                    if(block === 1) {
+                        if(j+2 < horizontal){
+                            if(copy[i][j] === 0 && copy[i][j+1] === 0 && copy[i][j+2] === 0) {
+                                copy[i][j] = 1;
+                                copy[i][j+1] = 1;
+                                copy[i][j+2] = 1;
+                                let count = 0;
+                                for(let x of copy) {
+                                    if(!x.includes(0)) count ++;
+                                }
+                                max = max > count ? max : count;
+                            }
+                        }
+                    }
+
+                    if(block === 2) {
+                        if(i+1 < vertical && j+1 < horizontal){
+                            if(copy[i][j] === 0 && copy[i+1][j] === 0 && copy[i+1][j+1] === 0) {
+                                copy[i][j] = 1;
+                                copy[i+1][j] = 1;
+                                copy[i+1][j+1] = 1;
+                                let count = 0;
+                                for(let x of copy) {
+                                    if(!x.includes(0)) count ++;
+                                }
+                                max = max > count ? max : count;
+                            }
+                        }
+                    }
+
+                    if(block === 3) {
+                        if(i-1 >= 0 && j-1 >= 0){
+                            if(copy[i][j-1] === 0 && copy[i][j] === 0 && copy[i-1][j] === 0) {
+                                copy[i][j] = 1;
+                                copy[i-1][j] = 1;
+                                copy[i][j-1] = 1;
+                                let count = 0;
+                                for(let x of copy) {
+                                    if(!x.includes(0)) count ++;
+                                }
+                                max = max > count ? max : count;
+                            }
+                        }
+                    }
+
+                    if(block === 4) {
+                        if(i+1 < vertical && j+1 < horizontal){
+                            if(copy[i][j] === 0 && copy[i][j+1] === 0 && copy[i+1][j+1] === 0) {
+                                copy[i][j] = 1;
+                                copy[i+1][j+1] = 1;
+                                copy[i][j+1] = 1;
+                                let count = 0;
+                                for(let x of copy) {
+                                    if(!x.includes(0)) count ++;
+                                }
+                                max = max > count ? max : count;
+                            }
+                        }
+                    }
+
+                    if(block === 5) {
+                        if(i+1 < vertical && j+1 < horizontal){
+                            if(copy[i][j] === 0 && copy[i+1][j] === 0 && copy[i][j+1] === 0) {
+                                copy[i][j] = 1;
+                                copy[i+1][j] = 1;
+                                copy[i][j+1] = 1;
+                                let count = 0;
+                                for(let x of copy) {
+                                    if(!x.includes(0)) count ++;
+                                }
+                                max = max > count ? max : count;
+                            }
+                        }
+                    }
+                }
+            }
+            answer = max
+            return answer;
+        }
+        const block = 5;
+        const board = [[1,0,0,0],[1,0,0,1],[1,1,0,1],[1,1,0,1]]
+        console.log(solution(block,board))
+    </script>
+</body>
+</html>

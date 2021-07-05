@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(N, stages) {
+            var answer = [];
+            for(let i=1; i<=N; i++) {
+                let noClearUser = 0;
+                let reachedUser = 0;
+                for(let x of stages) {
+                    if(x >= i) reachedUser++;
+                    if(x === i) noClearUser++;
+                }  
+                if(reachedUser === 0) answer.push([0, i]);
+                else answer.push([(noClearUser/reachedUser), i]);
+            }
+            answer.sort((a,b) => {
+                if(a[0] === b[0]) return a[1] - b[1];
+                else return b[0] - a[0];
+            })
+            for(let i=0; i<answer.length; i++) {
+                answer[i] = answer[i][1]
+            }
+            return answer;
+        }
+        const N = 4;
+        const stages = [4,4,4,4,4];
+
+        const N = 5;
+        const stages = [2, 1, 2, 6, 2, 4, 3, 3];
+        console.log(solution(N, stages))
+    </script>
+</body>
+</html>

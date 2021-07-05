@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(k, rates) {
+            var answer = 0;
+            let check = "N";
+            let dollar = 0;
+            let nextsell = 0; 
+            for(let i=0; i<rates.length; i++) {
+                if(check === "N") {
+                    if(rates[i] > k) {
+                        continue;
+                    }
+                    let buyNum = i+1;
+                    while(rates[i] < rates[buyNum]) {
+                        buyNum ++;
+                    }
+                    let tmp = rates.slice(i+1, buyNum);
+                    if(tmp.length) {
+                        check = "Y"
+                        k -= rates[i];
+                        dollar ++;
+                        nextsell = Math.max(...tmp);
+                    }
+                } else {
+                    if(rates[i] === nextsell) {
+                        k += rates[i];
+                        nextsell = 0;
+                        dollar --
+                        check = "N"
+                    }
+                }
+            }
+            answer = k;
+            return answer;
+        }
+
+        const rates = [1200, 1000, 1100, 1200, 900, 1000, 1500, 900, 750, 1100]
+        const k = 1000;
+
+        const rates1 = [1500, 1400, 1300, 1200]
+        const k1 = 1000;
+
+        console.log(solution(k, rates))
+    </script>
+</body>
+</html>
+
+
