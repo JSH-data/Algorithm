@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function spiltStr(str) {
+            let arr = []
+            str = str.toUpperCase();
+            for(let i=0; i<str.length-1; i++) {
+                let splited = str.substring(i, i+2);
+                if(splited.search(/[^A-Z]/g) === -1) {
+                    arr.push(splited);
+                }
+            }
+            return arr;
+        }
+
+        function solution(str1, str2) {
+            var answer = 0;
+            let arr1 = spiltStr(str1);
+            let arr2 = spiltStr(str2);
+            let plus = [];
+            let minus = [];
+            let map1 = new Map();
+            for(let x of arr1) {
+                if(map1.has(x)) {
+                    map1.set(x, map1.get(x)+1)
+                } else {
+                    map1.set(x, 1)
+                }
+            }
+            
+            for(let y of arr2) {
+                if(map1.has(y) && map1.get(y)>=1) {
+                    map1.set(y, map1.get(y)-1)
+                    minus.push(y);
+                }   
+            }
+            for(let y of arr2) {
+                if(map1.has(y)) {
+                    map1.set(y, map1.get(y)+1)
+                } else map1.set(y, 1)
+            }
+            
+            let minusNum = minus.length;
+            let plusNum = 0;
+            for(let z of map1) {
+                plusNum += z[1];
+            }
+            if(arr1.length === 0 && arr2.length === 0) {
+                return 65536
+            }
+
+            if(minusNum === 0) return 0
+            
+            answer = parseInt(65536*(minusNum/plusNum))
+            
+            return answer;
+        }
+        let str1 = "aa1+aa2";
+        let str2 = "AAAA12";
+        console.log(solution(str1, str2))
+    </script>
+</body>
+</html>
