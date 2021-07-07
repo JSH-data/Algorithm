@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function combination(arr, num) {
+            const result = [];
+            if(num === 1) {
+                return arr.map((value) => [value]);
+            }
+            arr.forEach((fixed, index, origin) => {
+                const rest = origin.slice(index + 1);
+                const combinations = combination(rest, num-1);
+                const attached = combinations.map((combination) => [fixed, ...combination]);
+        
+                result.push(...attached);
+            })
+            return result
+        }
+        
+        function solution(orders, course) {
+            let answer = [];
+        
+            for(let i = 0; i<course.length; i++) {
+                const result = {};
+                let max = 0;
+                orders.forEach((element) => {
+                    combination(element.split(""), course[i]).forEach((e) => {
+                        const str = e.sort().join("");
+                        if(!isNaN(result[str])) {
+                            result[str] += 1;
+                            max = max > result[str] ? max : result[str];
+                        } else result[str] = 1;
+                    })
+                })
+        
+                if(max >= 2) {
+                    for(const [key, value] of Object.entries(result)) {
+                        if(value === max) answer.push(key);
+                    }
+                }
+        
+            }
+            return answer.sort();
+        }
+        const orders = ["ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"];
+        const course = [2,3,4];
+
+        console.log(solution(orders, course))
+    </script>
+</body>
+</html>
