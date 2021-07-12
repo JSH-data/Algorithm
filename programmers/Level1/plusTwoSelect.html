@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(numbers) {
+            let answer = [];
+            let set = new Set();
+            numbers.forEach((value, idx, origin) => {
+                const rest = origin.slice(idx+1);
+                const attached = rest.map((com) => com + value);
+                for(let x of attached) {
+                    if(!set.has(x)) {
+                        set.add(x)
+                    }
+                }
+            })
+            for(let x of set) {
+                answer.push(x);
+            }
+            return answer.sort((a, b) => a-b);
+        }
+        
+    </script>
+</body>
+</html>
