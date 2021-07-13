@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function makeSide(arrChan, nums) {
+            let r = nums[2] - nums[0];
+            let c = nums[3] - nums[1];
+            for(let i=0;i<nums.length;i++) {
+                nums[i] = nums[i] - 1
+            }
+            const top = [];
+            const left = [];
+            const right = [];
+            const bottom = [];
+
+            for(let a=0; a<r; a++) {
+                left.push(arrChan[nums[2]-a][nums[1]]);
+            }
+            for(let a=0; a<c; a++) {
+                top.push(arrChan[nums[0]][nums[1]+a]);
+            }
+            for(let a=0; a<r; a++) {
+                right.push(arrChan[nums[0]+a][nums[3]]);
+            }
+            for(let a=0; a<c; a++) {
+                bottom.push(arrChan[nums[2]][nums[3]-a]);
+            }
+            
+            // 회전
+            for(let a=0; a<c; a++) {
+                arrChan[nums[0]][nums[1]+1+a] = top[a];
+            }
+            for(let a=0; a<r; a++) {
+                arrChan[nums[2]-1-a][nums[1]] = left[a];
+            }
+            for(let a=0; a<r; a++) {
+                arrChan[nums[0]+1+a][nums[3]] = right[a];
+            }
+            for(let a=0; a<c; a++) {
+                arrChan[nums[2]][nums[3]-1-a] = bottom[a];
+            }
+            let minArr = [...top, ...left, ...bottom, ...right];
+            let min = Math.min(...minArr)
+            return min
+        }
+
+
+        function solution(rows, columns, queries) {
+            const  answer = [];
+            let arr = Array.from({length:rows}, ()=> new Array(columns))
+            let fills = 1;
+            
+            for(let i=0; i<rows; i++) {
+                for(let j=0; j<columns; j++) {
+                    arr[i][j]=fills;
+                    fills ++;
+                }
+            }
+            
+            for(let x of queries) {
+                let min = makeSide(arr, x);  
+                answer.push(min);
+            }
+
+            return answer;
+        }
+        const rows = 6;
+        const columns = 6;
+        const queries = [[2,2,5,4],[3,3,6,6],[5,1,6,3]]
+        console.log(solution(rows, columns, queries))
+    </script>
+</body>
+</html>
