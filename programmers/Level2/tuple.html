@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(s) {
+            var answer = [];
+            const arr = s.split("},");
+            const originTuple = Array.from({length:arr.length}, () => 0)
+            const set = new Set();
+            for(let x of arr) {
+                const split = x.split(",")
+                originTuple[split.length-1] = x.replace(/[{}]/g, '');
+            }
+            for(let y of originTuple) {
+                let tmp = y.split(",");
+                tmp.forEach((now, idx, origin) => {
+                    if(!set.has(now)) {
+                        set.add(now)
+                        answer.push(parseInt(now))
+                    } 
+                })
+            }
+            
+            return answer;
+        }
+        const t = "{{123}}";
+        const s = "{{1,2,3},{2,1},{1,2,4,3},{2}}"
+        console.log(solution(t))
+    </script>
+</body>
+</html>

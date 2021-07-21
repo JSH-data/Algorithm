@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(a, b) {
+            let arr = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            let day = 0;
+            let arr2 = ['FRI','SAT','SUN','MON','TUE','WED','THU']
+            
+            for(let i=0; i<a-1; i++) {
+                day+=arr[i];
+            }
+            day+=b-1;
+            let rest = day % 7;
+            
+            return arr2[rest];
+        }
+
+        const a = 5;
+        const b = 24;
+        
+        console.log(solution(a,b))
+    </script>
+</body>
+</html>
