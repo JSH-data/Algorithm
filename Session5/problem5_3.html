@@ -6,7 +6,20 @@
     <body>
         <script>
             function solution(m, arr){
-           
+                let answer = 0;
+                let p1 = p2 = 0;                
+                let sum = 0;
+                while(p2 != arr.length) {
+                    if(sum === m) {
+                        answer ++;
+                        sum -= arr[p1++];
+                        sum += arr[++p2];
+                    } else if(sum > m){
+                        sum -= arr[p1++];
+                    } else {
+                        sum += arr[++p2];
+                    }
+                }
                 return answer;
             }
             

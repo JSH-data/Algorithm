@@ -1,3 +1,29 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(a, b){
+                let answer = '';
+                const set = new Set(a);
+                for(let x of b) {
+                    if(set.has(x)) {
+                        answer += x;
+                    }
+                }
+                
+                return answer.split('').sort((a,b) => a-b).join('')
+            }
+            
+            let a=[1, 3, 9, 5, 2];
+            let b=[3, 2, 5, 7, 8];
+            console.log(solution(a, b));
+        </script>
+    </body>
+</html> -->
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -6,11 +32,21 @@
     <body>
         <script>
             function solution(arr1, arr2){
-                let answer = '';
-
-                for(let x of arr1) {
+                let answer = [];
+                let x = 0;
+                let y = 0;
+                arr1.sort((a,b) => a-b);
+                arr2.sort((a,b) => a-b);
+                while(arr1[x] && arr2[y]) {
+                    if(arr1[x] === arr2[y]) {
+                        answer.push(arr1[x++]);
+                        y++;
+                    } 
+                    else if(arr1[x] > arr2[y]) y++;
+                    else x++;
                 }
-                return answer;
+                
+                return answer.join('')
             }
             
             let a=[1, 3, 9, 5, 2];
