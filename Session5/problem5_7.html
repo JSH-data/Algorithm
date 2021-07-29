@@ -6,13 +6,15 @@
     <body>
         <script>
             function solution(str1, str2){
-           
-                return answer;
+                if(str1.split("").sort().join("") === str2.split("").sort().join("")) return "YES";
+                return "NO"
             }
             
             let a="AbaAeCe";
             let b="baeeACA";
-            console.log(solution(a, b));
+            const c = "abaCC"
+            const d = "Caaab";
+            console.log(solution(c, d));
         </script>
     </body>
 </html>

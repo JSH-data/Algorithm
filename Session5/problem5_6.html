@@ -7,7 +7,24 @@
         <script>
             function solution(s){  
                 let answer;
-           
+                let max = 0;
+                const LEN = s.length;
+                const CANDIDATE = {
+                    "A" : 0,
+                    "B" : 0,
+                    "C" : 0,
+                    "D" : 0,
+                    "E" : 0,
+                }
+                for(let x of s) {
+                    CANDIDATE[x] ++;
+                }           
+                for(let [key, value] of Object.entries(CANDIDATE)) {
+                    if(value > max) {
+                        max = value;
+                        answer = key
+                    }
+                }
                 return answer;
             }
 
