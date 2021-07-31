@@ -98,7 +98,7 @@
             function solution(board, moves){
                 let answer = 0;
                 let len = board.length;
-                let stack = [];
+                const stack = [];
                 for(let x of moves) {
                     for(let i=0; i<len; i++) {
                         if(board[i][x-1] != 0) {
