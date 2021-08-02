@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(need, plan){
+                const compare = plan.split("").filter((val) => {if(need.includes(val)) return val}).join("")
+                if(need === compare) return "YES"
+                else "NO"
+            }
+            function solution1(need, plan){
+                const queue = need.split("")
+                for(let i=0; i<plan.length; i++) {
+                    if(queue.includes(plan[i])) {
+                        if(plan[i] === queue[0]) queue.shift();
+                        else return "NO"
+                    }
+                }
+                if(queue.length === 0) return "YES"
+                else return "NO"
+            } 
+
+            let a="CBA";
+            let b="CBDAGE";
+            console.log(solution1(a, b));
+        </script>
+    </body>
+</html>
