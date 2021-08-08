@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function count(arr, mid) {
+                let cnt = 1; // 마굿간에 들어간 말의 숫자
+                let ep = arr[0] //마지막으로 들어간 말의 위치, 초기값은 가장 멀리 떨어질 수 있도록 첫 번째 자리에 위치 시킵니다.
+                for(let i=1; i<arr.length; i++) {
+                    if((stable[i]-ep) >= mid) { // 중간값보다 크면 넣습니다. 왜? 우리는 제일 큰 값을 원하니까, 쭈욱 돌면서 중간 값보다 큰 경우에만 말을 넣습니다.
+                        cnt ++; // 말을 넣었다는 의미
+                        ep = stable[i]; // 이 후로는 이값으로 거리를 비교 합니다. 
+                    }
+                }    
+
+                return result;
+            }
+
+
+            function solution(c, stable){
+                stable.sort((a, b) => a-b);
+                let lt = 1; // 최소 거리
+                let rt = stable[stable.length-1]; // 최대 거리
+
+                while(lt <= rt)  {
+                    let mid = parseInt((lt + rt)/2); // 말 사이의 거리 중간값, 가장 가까우면서 최대 거리를 나타냄
+                    if(count(stable, mid) >= c) {
+                        answer = mid; // 임시로 넣어놓기 바뀔 수 있음
+                        lt = mid + 1; // 중간 값이 작아서 말이 많이 들어갔으니 최소 거리 값을 중간값으로 올립시다
+                    } else rt = mid - 1 // 중간 값이 커서 말이 적게 들어갔으니 최소 거리 값을 중간값으로 내립시다
+                }
+            }
+
+            let arr=[1, 2, 8, 4, 9];
+            console.log(solution(3, arr));
+        </script>
+    </body>
+</html>
+

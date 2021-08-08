@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function DFS(sum, idx, obj) {
+        if (sum > obj.limit) return;
+        else if (idx === obj.arr.length) {
+          obj.max = obj.max > sum ? obj.max : sum;
+        } else {
+          DFS(sum + obj.arr[idx], idx + 1, obj);
+          DFS(sum, idx + 1, obj);
+        }
+      }
+
+      function solution(c, arr) {
+        const obj = {
+          arr: arr,
+          limit: c,
+          max: 0,
+        };
+        DFS(0, 0, obj);
+        console.log(obj);
+        return obj.max;
+      }
+
+      let arr = [81, 58, 42, 33, 61];
+      console.log(solution(259, arr));
+    </script>
+  </body>
+</html>
