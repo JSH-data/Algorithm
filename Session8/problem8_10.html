@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function DFS(set, idx, obj) {
+        if (idx === obj.len) {
+          obj.answer.push([...set]);
+        } else {
+          for (let i = 0; i < obj.source.length; i++) {
+            if (set.includes(obj.source[i])) {
+              continue;
+            } else {
+              set.push(obj.source[i]);
+              DFS(set, idx + 1, obj);
+            }
+            set.pop();
+          }
+        }
+      }
+
+      function solution(m, arr) {
+        const obj = {
+          len: m,
+          source: arr,
+          answer: [],
+        };
+
+        DFS([], 0, obj);
+        return obj.answer;
+      }
+      let arr = [3, 6, 9];
+      console.log(solution(2, arr));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function DFS(sum, idx, obj) {
+        if (idx === obj.num) {
+          if (sum % obj.condition === 0 && !obj.answer.includes(sum)) {
+            obj.answer.push(sum);
+          }
+        } else {
+          for (let i = 0; i < obj.arr.length; i++) {
+            if (obj.check.includes(i)) {
+              continue;
+            } else {
+              obj.check.push(i);
+              DFS(sum + obj.arr[i], idx + 1, obj);
+              obj.check.pop(i);
+            }
+          }
+        }
+      }
+
+      function solution(n, k, arr, m) {
+        const obj = {
+          arr: arr,
+          check: [],
+          num: k,
+          condition: m,
+          answer: [],
+        };
+        DFS(0, 0, obj);
+
+        return obj.answer.length;
+      }
+
+      let arr = [2, 4, 5, 8, 12];
+      console.log(solution(5, 3, arr, 6));
+    </script>
+  </body>
+</html>
