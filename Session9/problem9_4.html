@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function DFS(x, y, obj) {
+        if (x === obj.goal && y === obj.goal) {
+          obj.answer += 1;
+        } else {
+          for (let k = 0; k < 4; k++) {
+            let nx = x + obj.dx[k];
+            let ny = y + obj.dy[k];
+            if (
+              nx >= 0 &&
+              nx <= obj.goal &&
+              ny >= 0 &&
+              ny <= obj.goal &&
+              obj.arr[nx][ny] === 0
+            ) {
+              obj.arr[nx][ny] = 1;
+              DFS(nx, ny, obj);
+              obj.arr[nx][ny] = 0;
+            }
+          }
+        }
+      }
+
+      function solution(board) {
+        board[0][0] = 1;
+        const obj = {
+          arr: board,
+          goal: board.length - 1,
+          dx: [-1, 0, 1, 0],
+          dy: [0, 1, 0, -1],
+          answer: 0,
+        };
+        DFS(0, 0, obj);
+
+        return obj.answer;
+      }
+
+      let arr = [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 1, 0, 0, 0],
+        [1, 1, 0, 1, 0, 1, 1],
+        [1, 1, 0, 0, 0, 0, 1],
+        [1, 1, 0, 1, 1, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0],
+      ];
+
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>

@@ -1,21 +1,62 @@
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>출력결과</title>
-    </head>
-    <body>
-        <script>
-            function solution(n, f){         
-                let answer;
-                function DFS() {
-
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function DFS(sumArr, obj) {
+        if (obj.answer.length !== 0) {
+          return;
+        }
+        if (sumArr.length === obj.len) {
+          const sum = sumArr.reduce((a, b, i) => a + b, 0);
+          if (sum === obj.fix) {
+            obj.answer.push(
+              sumArr.map((v, i) => {
+                if (i === 0 || i === obj.len - 1) {
+                  return v;
+                } else {
+                  return v / 3;
                 }
-
-                DFS();
-                return answer;
+              })
+            );
+          }
+        } else {
+          for (let i = 0; i < obj.len; i++) {
+            if (obj.check[i] === 1) {
+              continue;
+            } else {
+              obj.check[i] = 1;
+              if (sumArr.length === 0 || sumArr.length === obj.len - 1) {
+                sumArr.push(obj.arr[i]);
+              } else {
+                sumArr.push((obj.len - 1) * obj.arr[i]);
+              }
+              DFS(sumArr, obj);
+              obj.check[i] = 0;
+              sumArr.pop();
             }
+          }
+        }
+      }
 
-            console.log(solution(4, 16));
-        </script>
-    </body>
+      function solution(n, f) {
+        const standard = Array.from({ length: n }, (v, i) => i + 1);
+        const check = Array.from({ length: n }, () => 0);
+        const obj = {
+          len: n,
+          arr: standard,
+          check: check,
+          fix: f,
+          answer: [],
+        };
+        const sumArr = [];
+        DFS(sumArr, obj);
+        return obj.answer[0];
+      }
+
+      console.log(solution(4, 16));
+    </script>
+  </body>
 </html>
