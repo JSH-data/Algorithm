@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function DFS(x, y, obj) {
+        if (obj.arr[x[y] === 0]) {
+          return;
+        } else {
+          for (let k = 0; k < 8; k++) {
+            let cor_x = x + obj.xr[k];
+            let cor_y = y + obj.yr[k];
+
+            if (
+              cor_y >= 0 &&
+              cor_y < 7 &&
+              cor_x >= 0 &&
+              cor_x < 7 &&
+              obj.arr[cor_x][cor_y] === 1
+            ) {
+              obj.arr[cor_x][cor_y] = 0;
+              DFS(cor_x, cor_y, obj);
+            }
+          }
+        }
+      }
+
+      function solution(board) {
+        let answer = 0;
+        const nx = [0, 1, 1, 1, 0, -1, -1, -1];
+        const ny = [-1, -1, 0, 1, 1, 1, 0, -1];
+        const obj = {
+          xr: nx,
+          yr: ny,
+          arr: board,
+        };
+        for (let i = 0; i < board.length; i++) {
+          for (let j = 0; j < board.length; j++) {
+            if (obj.arr[i][j] === 1) {
+              obj.arr[i][j] = 0;
+              DFS(i, j, obj);
+              answer++;
+            }
+          }
+        }
+        return answer;
+      }
+
+      let arr = [
+        [1, 1, 0, 0, 0, 1, 0],
+        [0, 1, 1, 0, 1, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 1, 1],
+        [1, 1, 0, 1, 1, 0, 0],
+        [1, 0, 0, 0, 1, 0, 0],
+        [1, 0, 1, 0, 1, 0, 0],
+      ];
+
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
