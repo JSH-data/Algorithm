@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n) {
+        const dy = Array.from({ length: n + 1 }).fill(0);
+        dy[0] = 1;
+        dy[1] = 2;
+        for (let i = 2; i < dy.length; i++) {
+          dy[i] = dy[i - 1] + dy[i - 2];
+        }
+        console.log(dy[dy.length - 1]);
+      }
+
+      console.log(solution(7));
+    </script>
+  </body>
+</html>

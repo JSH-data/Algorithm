@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function BFS(x, y, obj) {
+        const queue = [[x, y]];
+        while (queue.length !== 0) {
+          const [sx, sy] = queue.shift();
+          for (let i = 0; i < obj.nx.length; i++) {
+            const movedX = sx + obj.nx[i];
+            const movedY = sy + obj.ny[i];
+            if (
+              movedX >= 0 &&
+              movedX <= 6 &&
+              movedY >= 0 &&
+              movedY <= 6 &&
+              obj.arr[movedX][movedY] === 1
+            ) {
+              obj.arr[movedX][movedY] = 0;
+              queue.push([movedX, movedY]);
+            }
+          }
+        }
+      }
+      function solution(board) {
+        let answer = 0;
+        const len = board.length;
+        const nx = [0, 1, 1, 1, 0, -1, -1, -1];
+        const ny = [-1, -1, 0, 1, 1, 1, 0, -1];
+        const obj = {
+          arr: board,
+          legnth: len,
+          nx: nx,
+          ny: ny,
+        };
+
+        for (let i = 0; i < len; i++) {
+          for (let j = 0; j < len; j++) {
+            if (board[i][j] === 1) {
+              board[i][j] = 0;
+              BFS(i, j, obj);
+              answer++;
+            }
+          }
+        }
+        return answer;
+      }
+
+      let arr = [
+        [1, 1, 0, 0, 0, 1, 0],
+        [0, 1, 1, 0, 1, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 1, 1],
+        [1, 1, 0, 1, 1, 0, 0],
+        [1, 0, 0, 0, 1, 0, 0],
+        [1, 0, 1, 0, 1, 0, 0],
+      ];
+
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>

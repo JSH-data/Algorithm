@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let answer = 0;
+        const dy = Array.from({ length: arr.length }).fill(0);
+        dy[0] = 1;
+        for (let i = 1; i < dy.length; i++) {
+          const tmp = [];
+          for (let j = i - 1; j >= 0; j--) {
+            if (arr[j] < arr[i]) {
+              tmp.push(dy[j]);
+            }
+          }
+          dy[i] = Math.max(...tmp) + 1;
+        }
+        return Math.max(...dy);
+      }
+
+      let arr = [5, 3, 7, 8, 6, 2, 9, 4];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
