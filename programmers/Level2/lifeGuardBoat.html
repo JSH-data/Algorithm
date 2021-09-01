@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(people, limit) {
+        const sorted = people.sort((a, b) => a - b);
+        let boat = 0; // 보트의 갯수 입니다
+        let start = 0; // 가장 작은 몸무게
+        let end = people.length - 1; // 가장 큰 몸무게
+        while (start <= end) {
+          if (sorted[start] + sorted[end] > limit) {
+            // 가장 작은 것과 가장 큰 것을 더했을 때 limit을 초과하는 경우
+            boat++;
+            end--;
+          } else {
+            end--;
+            boat++;
+            start++;
+          }
+        }
+        return boat;
+      }
+    </script>
+  </body>
+</html>
