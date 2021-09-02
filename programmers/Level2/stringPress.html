@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function devide(s, num) {
+        // 나눠주는 함수
+        let stack = [];
+        const arr = [];
+        for (let i = 0; i < s.length; i++) {
+          stack.push(s[i]);
+          if (stack.length === num) {
+            arr.push(stack.join(""));
+            stack = [];
+          }
+        }
+        if (stack.length !== 0) arr.push(stack.join(""));
+        return arr;
+      }
+
+      function solution(s) {
+        let answer = 1000;
+        if (s.length === 1) return 1;
+        for (let i = 1; i <= parseInt(s.length / 2); i++) {
+          const arrSet = devide(s, i);
+          let count = 1;
+          let tmp = "";
+          while (arrSet.length) {
+            const cnt = arrSet.shift();
+            if (cnt === arrSet[0]) count++;
+            else {
+              if (count === 1) tmp = tmp + cnt;
+              else tmp = tmp + count + cnt;
+              count = 1;
+            }
+          }
+          answer = Math.min(answer, tmp.length);
+        }
+        return answer;
+      }
+    </script>
+  </body>
+</html>
