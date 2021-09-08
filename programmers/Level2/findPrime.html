@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function prime(obj) {
+        // 소수 만들기
+        const tmp = [];
+        let isPirme = 0;
+        for (let x of obj.accArr) tmp.push(obj.stand[x]); // 숫자 만들기
+        let number = parseInt(tmp.join(""));
+        if (obj.primes.includes(number)) return;
+
+        if (number === 0 || number === 1) return;
+
+        if (number === 2 || number === 3) {
+          obj.primes.push(number);
+          obj.count++;
+          return;
+        }
+        if (number % 2 === 0) return;
+
+        for (let i = 3; i <= parseInt(number / 2); i += 2) {
+          if (number % i === 0) return;
+        }
+        obj.primes.push(number);
+        obj.count++;
+        return;
+      }
+
+      function DFS(obj) {
+        // DFS로 숫자 만들기
+        if (obj.accArr.length === obj.len) return;
+        else {
+          for (let i = 0; i < obj.len; i++) {
+            if (!obj.accArr.includes(i)) {
+              obj.accArr.push(i);
+              prime(obj);
+              DFS(obj);
+              obj.accArr.pop();
+            }
+          }
+        }
+      }
+
+      function solution(numbers) {
+        const numArr = numbers.split("");
+        const obj = {
+          stand: numArr,
+          len: numArr.length,
+          accArr: [],
+          count: 0,
+          primes: [],
+        };
+        DFS(obj);
+        return obj.count;
+      }
+    </script>
+  </body>
+</html>

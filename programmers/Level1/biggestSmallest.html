@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function multiple(small, large) {
+        let i = 1;
+        while (true) {
+          const largeTmp = i * large;
+          if (largeTmp % small === 0) {
+            return largeTmp;
+          }
+          i++;
+        }
+      }
+
+      function measure(num) {
+        const arr = [];
+        for (let i = 1; i <= parseInt(num / 2); i++) {
+          if (num % i === 0 && !arr.includes(i)) {
+            const front = i;
+            const back = num / i;
+            if (front === back) arr.push(front);
+            else {
+              arr.push(front);
+              arr.push(back);
+            }
+          }
+        }
+        return arr.sort((a, b) => a - b);
+      }
+
+      function solution(n, m) {
+        let biggest = 0;
+        let smallest = 0;
+        if (n === m) return [n, m];
+        let large = 0;
+        let small = 0;
+        if (n > m) {
+          large = n;
+          small = m;
+        } else {
+          large = m;
+          small = n;
+        }
+        const smallArr = measure(small);
+        const largeArr = measure(large);
+        for (let x of smallArr) {
+          if (largeArr.includes(x)) {
+            biggest = x;
+          }
+        }
+        smallest = multiple(small, large);
+        return [biggest, smallest];
+      }
+    </script>
+  </body>
+</html>
