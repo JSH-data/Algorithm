@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function manhattan(arr, x, y, obj) {
+        const tmp = [];
+        for (let i = 0; i < 4; i++) {
+          let corX = x + obj.x1[i];
+          let corY = y + obj.y1[i];
+          if (corX >= 0 && corX < 5 && corY >= 0 && corY < 5) {
+            if (arr[corX][corY] === "P") {
+              return false;
+            } else tmp.push(arr[corX][corY]);
+          } else {
+            tmp.push("");
+          }
+        }
+
+        let flag = -1;
+
+        for (let i = 0; i < 8; i++) {
+          let corX = x + obj.x2[i];
+          let corY = y + obj.y2[i];
+          if (obj.x2[i] === 0 || obj.y2[i] === 0) {
+            flag++;
+          }
+          if (
+            corX >= 0 &&
+            corX < 5 &&
+            corY >= 0 &&
+            corY < 5 &&
+            arr[corX][corY] === "P"
+          ) {
+            if (obj.x2[i] === 0 || obj.y2[i] === 0) {
+              if (tmp[flag] !== "X") {
+                return false;
+              }
+            } else {
+              let xs = flag;
+              let ys = flag === 3 ? 0 : flag + 1;
+              if (tmp[xs] !== "X" || tmp[ys] !== "X") {
+                return false;
+              }
+            }
+          }
+        }
+        return true;
+      }
+
+      function check(arr, obj) {
+        for (let i = 0; i < 5; i++) {
+          for (let j = 0; j < 5; j++) {
+            if (arr[i][j] === "P") {
+              const isOkay = manhattan(arr, i, j, obj);
+              if (!isOkay) {
+                obj.answer.push(0);
+                return;
+              }
+            }
+          }
+        }
+        obj.answer.push(1);
+      }
+
+      function solution(places) {
+        const obj = {
+          x1: [-1, 0, 1, 0],
+          y1: [0, 1, 0, -1],
+          x2: [-2, -1, 0, 1, 2, 1, 0, -1],
+          y2: [0, 1, 2, 1, 0, -1, -2, -1],
+          answer: [],
+        };
+        for (let x of places) {
+          check(x, obj);
+        }
+        return obj.answer;
+      }
+    </script>
+  </body>
+</html>
