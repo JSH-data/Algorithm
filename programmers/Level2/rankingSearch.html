@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function makeQuery(query) {
+        return query.map((v) => {
+          const arr = v.split(" and ");
+          const tmp = arr.pop().split(" ");
+          arr.push(...tmp);
+          return arr;
+        });
+      }
+
+      function solution(info, query) {
+        const infos = [];
+        const answer = [];
+        class candidate {
+          constructor(arr) {
+            this.lang = arr[0];
+            this.position = arr[1];
+            this.carier = arr[2];
+            this.food = arr[3];
+            this.score = arr[4];
+          }
+          compare(arr) {
+            if (arr[0] !== "-" && arr[0] !== this.lang) return false;
+            if (arr[1] !== "-" && arr[1] !== this.position) return false;
+            if (arr[2] !== "-" && arr[2] !== this.carier) return false;
+            if (arr[3] !== "-" && arr[3] !== this.food) return false;
+            if (Number(arr[4]) > Number(this.score)) return false;
+            return true;
+          }
+        }
+
+        for (let i = 0; i < info.length; i++) {
+          const rawInfo = info[i].split(" ");
+          infos.push(new candidate(rawInfo));
+        }
+
+        const chase = makeQuery(query);
+
+        for (let x of chase) {
+          let tmp = 0;
+
+          for (let y of infos) {
+            if (y.compare(x)) tmp++;
+          }
+          answer.push(tmp);
+        }
+        return answer;
+      }
+      const info = [
+        "java backend junior pizza 150",
+        "python frontend senior chicken 210",
+        "python frontend senior chicken 150",
+        "cpp backend senior pizza 260",
+        "java backend junior chicken 80",
+        "python backend senior chicken 50",
+      ];
+      const query = [
+        "java and backend and junior and pizza 100",
+        "python and frontend and senior and chicken 200",
+        "cpp and - and senior and pizza 250",
+        "- and backend and senior and - 150",
+        "- and - and - and chicken 100",
+        "- and - and - and - 150",
+      ];
+      console.log(solution(info, query));
+    </script>
+  </body>
+</html>
