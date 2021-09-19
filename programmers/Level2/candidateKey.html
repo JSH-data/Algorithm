@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(relation) {
+        let column = relation[0].length; // 컬럼의 갯수
+
+        let row = relation.length; // 행의 갯수
+
+        let count = 0; // 최종 반환 값, 후보키의 갯수
+
+        let bitMaskList = []; // ??
+
+        for (let i = 1; i < 1 << column; ++i) {
+          // 4개의 컬럼은 총 15개의 순서 조합이 필요합 1 ~ 15까지의 반복문 실행
+
+          let keySet = new Set();
+
+          for (let j = 0; j < row; ++j) {
+            let key = "";
+
+            for (let k = 0; k < column; ++k) {
+              if ((i & (1 << k)) != 0) key += relation[j][k];
+            }
+
+            keySet.add(key);
+          }
+          if (keySet.size == row && duplcateCheck(bitMaskList, i)) ++count;
+        }
+
+        return count;
+      }
+
+      function duplcateCheck(list, key) {
+        let size = list.length;
+
+        for (let i = 0; i < size; ++i) {
+          if ((list[i] & key) == list[i]) return false;
+        }
+
+        list.push(key);
+        return true;
+      }
+    </script>
+  </body>
+</html>
