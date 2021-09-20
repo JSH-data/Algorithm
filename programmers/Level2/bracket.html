@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function isRight(str) {
+        const stack = [];
+        for (let x of str) {
+          const last = stack[stack.length - 1];
+          if (x === "}" && last === "{") stack.pop();
+          else if (x === "]" && last === "[") stack.pop();
+          else if (x === ")" && last === "(") stack.pop();
+          else stack.push(x);
+        }
+        return stack.length === 0 ? true : false;
+      }
+
+      function rotate(origin, num) {
+        if (num === 0) return origin.slice(0);
+        else return origin.slice(num) + origin.slice(0, num);
+      }
+
+      function solution(s) {
+        const len = s.length;
+        let answer = 0;
+        for (let i = 0; i < len; ++i) {
+          const rotatedStr = isRight(rotate(s, i));
+          if (rotatedStr) answer++;
+        }
+        return answer;
+      }
+    </script>
+  </body>
+</html>
