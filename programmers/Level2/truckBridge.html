@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(bridge_length, weight, truck_weights) {
+        let done = 0;
+        const onBridge = [];
+        const len = truck_weights.length;
+        let time = 0;
+
+        while (done !== len) {
+          if (onBridge[0] !== undefined && onBridge[0][1] === bridge_length) {
+            onBridge.shift();
+            done++;
+          }
+          time++;
+          let nowWeight = onBridge.reduce((a, b) => a + b[0], 0);
+          if (nowWeight + truck_weights[0] <= weight) {
+            let going = truck_weights.shift();
+            onBridge.push([going, 0]);
+          }
+          for (let i = 0; i < onBridge.length; ++i) onBridge[i][1] += 1;
+        }
+        return time;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function nextR(arrow, obj) {
+        if (arrow[0] === "-1" && arrow[1] === "0") {
+          obj.next[0] = obj.cnt[0];
+          obj.next[1] = obj.cnt[1] + 1;
+        }
+        if (arrow[0] === "0" && arrow[1] === "1") {
+          obj.next[0] = obj.cnt[0] + 1;
+          obj.next[1] = obj.cnt[1];
+        }
+        if (arrow[0] === "1" && arrow[1] === "0") {
+          obj.next[0] = obj.cnt[0];
+          obj.next[1] = obj.cnt[1] - 1;
+        }
+        if (arrow[0] === "0" && arrow[1] === "-1") {
+          obj.next[0] = obj.cnt[0] - 1;
+          obj.next[1] = obj.cnt[1];
+        }
+      }
+
+      function nextL(arrow, obj) {
+        if (arrow[0] === "-1" && arrow[1] === "0") {
+          obj.next[0] = obj.cnt[0];
+          obj.next[1] = obj.cnt[1] - 1;
+        }
+        if (arrow[0] === "0" && arrow[1] === "1") {
+          obj.next[0] = obj.cnt[0] - 1;
+          obj.next[1] = obj.cnt[1];
+        }
+        if (arrow[0] === "1" && arrow[1] === "0") {
+          obj.next[0] = obj.cnt[0];
+          obj.next[1] = obj.cnt[1] + 1;
+        }
+        if (arrow[0] === "0" && arrow[1] === "-1") {
+          obj.next[0] = obj.cnt[0] + 1;
+          obj.next[1] = obj.cnt[1];
+        }
+      }
+
+      function nextS(arrow, obj) {
+        if (arrow[0] === "-1" && arrow[1] === "0") {
+          obj.next[0] = obj.cnt[0] - 1;
+          obj.next[1] = obj.cnt[1];
+        }
+        if (arrow[0] === "0" && arrow[1] === "1") {
+          obj.next[0] = obj.cnt[0];
+          obj.next[1] = obj.cnt[1] + 1;
+        }
+        if (arrow[0] === "1" && arrow[1] === "0") {
+          obj.next[0] = obj.cnt[0];
+          obj.next[1] = obj.cnt[1] + 1;
+        }
+        if (arrow[0] === "0" && arrow[1] === "-1") {
+          obj.next[0] = obj.cnt[0];
+          obj.next[1] = obj.cnt[1] - 1;
+        }
+      }
+
+      function direction(obj, origin) {
+        // 처음으로 이 함수를 호출했다면 next에는 아무 것도 없는 상황
+        const dx = obj.cnt[0] - obj.before[0];
+        const dy = obj.cnt[1] - obj.before[1];
+
+        const arrow = [dx, dy]; // 어느 방향에서 왔는지 알 수 있도록 도와주는 역할
+
+        if (obj.cnt[0] < 0) obj.cnt[0] = obj.row;
+        else if (obj.cnt[0] > obj.row) obj.cnt[0] = 0;
+        if (obj.cnt[1] < 0) obj.cnt[1] = obj.col;
+        else if (obj.cnt[1] < obj.col) obj.cnt[1] = 0;
+        // 위 로직은 next가 cnt로 바뀐경우 cnt가 정상적인 값으로 만들이지기 위함(벽을 통과해서 반대로 들어오는 경우)
+
+        if (origin[obj.cnt[0]][obj.cnt[1]] === "R") nextR(arrow, obj);
+        if (origin[obj.cnt[0]][obj.cnt[1]] === "L") nextL(arrow, obj);
+        if (origin[obj.cnt[0]][obj.cnt[1]] === "S") nextS(arrow, obj);
+      }
+
+      function steps(obj) {
+        const tmp = [...obj.cnt];
+        obj.cnt = [...obj.next];
+        obj.before = tmp;
+      }
+
+      function solution(grid) {
+        const row = grid.length - 1;
+        const col = grid[0].length - 1;
+        const move = [
+          [-1, 0],
+          [0, 1],
+          [1, 0],
+          [0, -1],
+        ];
+        const trans = grid.map((v) => v.split(""));
+
+        for (let i = 0; i < 4; ++i) {
+          const obj = {
+            before: [0, 0],
+            cnt: move[i],
+            next: ["", ""],
+            row: row,
+            col: col,
+          };
+          let n = 0;
+          while (n < 30) {
+            direction(obj, trans);
+            steps(obj);
+            n++;
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
