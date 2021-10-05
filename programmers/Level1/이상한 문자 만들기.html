@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        const arr = s.toLowerCase().split("");
+        let idx = 0;
+        return arr
+          .map((x) => {
+            if (x == " ") idx = 0;
+            else {
+              if (idx % 2 == 0) x = x.toUpperCase();
+              idx++;
+            }
+            return x;
+          })
+          .join("");
+      }
+    </script>
+  </body>
+</html>
