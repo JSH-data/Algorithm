@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
   <head>
     <meta charset="UTF-8" />
     <title>출력결과</title>
@@ -22,6 +22,38 @@
       }
 
       let arr = [5, 3, 7, 8, 6, 2, 9, 4];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        const dy = Array.from({ length: arr.length }).fill(0);
+        dy[0] = 1; // 가장 첫 번째 수보다 앞에 있는 숫자는 없으므로 그 값은 자기 자신만을 선택하는 방법 1개뿐
+
+        for (let i = 1; i < dy.length; i++) {
+          // 이미 정해진 첫 번째를 지나서부터 반복문시작
+          const tmp = [];
+          for (let j = i - 1; j >= 0; j--) {
+            if (arr[i] > arr[j]) {
+              tmp.push(dy[j]);
+            }
+          }
+          dy[i] = Math.max(...tmp) + 1;
+        }
+        return Math.max(...dy);
+      }
+      const arr = [5, 3, 7, 8, 6, 2, 9, 4];
       console.log(solution(arr));
     </script>
   </body>

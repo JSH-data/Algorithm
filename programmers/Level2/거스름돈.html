@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function DFS(cnt, obj) {
+        let sum = obj.set.reduce((acc, cur) => acc + cur, 0);
+        if (sum === obj.exchange) {
+          let test = [...obj.set].sort((a, b) => a - b).join("");
+          obj.tmp.push(test);
+        } else if (cnt > obj.limitCount || sum >= obj.exchange) return;
+        else {
+          for (let i = 0; i < obj.money.length; i++) {
+            obj.set.push(obj.money[i]);
+            DFS(cnt + 1, obj);
+            obj.set.pop();
+          }
+        }
+      }
+
+      function solution1(n, money) {
+        let limitCount;
+
+        if (money.includes(1)) limitCount = n;
+        else limitCount = Math.ceil(n / 2);
+
+        if (money.length === 1) {
+          return 1;
+        }
+        const answer = [];
+        const obj = {
+          exchange: n,
+          limitCount: limitCount,
+          money: money,
+          set: [],
+          tmp: [],
+        };
+        DFS(0, obj);
+        const dup = new Set(obj.tmp);
+        return dup.size;
+      } // DFS로 푸는 방식, 1가지 테스트 케이스 통과 못함
+
+      function solution2(n, money) {
+        const dy = Array.from({ length: n + 1 }, () => new Array());
+        dy[0].push(0);
+        for (let i = 0; i < money.length; i++) {
+          for (let j = money[i]; j <= n; j++) {
+            for (let k = 0; k < dy[j - money[i]].length; k++) {
+              dy[j].push(dy[j - money[i]][k] + 1);
+            }
+          }
+        }
+        return dy[n].length;
+      } // DP 적용하여 푸는 방식 정확성은 모두 맞았지만 효율성에서 0점
+
+      function solution(n, money) {
+        const dy = Array.from({ length: n + 1 }, () => 0);
+        // dy는 각 인덱스만큼의 거스름돈을 줄 수 있는 방법의 갯수이다
+        // ex) dy[10] => 10원을 거슬러주기위한 경우의 수
+        money.forEach((v) => {
+          dy[v] += 1;
+          // 거스름돈은 그 자체로 하나의 경우의 수가 될 수 있기 때문에 처리합니다
+          // v === 5인 경우
+          // dy[5]는 5원 하나로 거스름돈을 지불할 수 있음
+          for (let i = v; i <= n; i++) {
+            dy[i] += dy[i - v];
+            // 현재 v거스름돈을 하나 사용한다고 가정한다면
+            // v의 금액만큼 차감한 경우(v가 2고 5원을 만든다는 가정이라면, 3원을 만들 수 있는 경우 + 5원을 만들 수 있는 경우)
+            //를 생각할 수 있다
+          }
+        });
+        return dy[n];
+      }
+    </script>
+  </body>
+</html>
