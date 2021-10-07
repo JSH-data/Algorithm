@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(n) {
+        const set = new Set();
+        for (let i = 1; i <= Math.ceil(n / 2); i++) {
+          if (n % i === 0) {
+            set.add(i);
+            set.add(n / i);
+          }
+        }
+        let sum = 0;
+        for (let x of set) sum += x;
+        return sum;
+      }
+    </script>
+  </body>
+</html>
