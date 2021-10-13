@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(s, n) {
+        let answer = "";
+        const push = n % 26;
+        for (let x of s) {
+          if (x !== " ") {
+            let tmp = x.charCodeAt();
+            if (tmp >= 97 && tmp <= 122) {
+              tmp += push;
+              if (tmp > 122) answer += String.fromCharCode(tmp - 122 + 96);
+              else answer += String.fromCharCode(tmp);
+            } else {
+              tmp += push;
+              if (tmp > 90) answer += String.fromCharCode(tmp - 90 + 64);
+              else answer += String.fromCharCode(tmp);
+            }
+          } else answer += " ";
+        }
+        return answer;
+      }
+    </script>
+  </body>
+</html>
