@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function rating(arr1, arr2, num) {
+        const ratings = [];
+        for (let i = 0; i < num; i++) {
+          let wins = 0;
+          let weight = 0;
+          let none = 0;
+          for (let j = 0; j < num; j++) {
+            if (arr1[i][j] === "W") {
+              wins++;
+              if (arr2[j] > arr2[i]) weight++;
+            } else if (arr1[i][j] === "N") none++;
+          }
+          if (num - none !== 0)
+            ratings.push([i + 1, (wins / (num - none)) * 100, weight, arr2[i]]);
+          else ratings.push([i + 1, 0, weight, arr2[i]]);
+        }
+        return ratings;
+      }
+
+      function solution(weights, head2head) {
+        const num = weights.length;
+        const rate = rating(head2head, weights, num);
+        const answer = rate
+          .sort((a, b) => {
+            if (a[1] != b[1]) return b[1] - a[1];
+            else {
+              if (a[2] != b[2]) return b[2] - a[2];
+              else {
+                if (a[3] != b[3]) return b[3] - a[3];
+                else return a[0] - b[0];
+              }
+            }
+          })
+          .map((v) => v[0]);
+        return answer;
+      }
+    </script>
+  </body>
+</html>
