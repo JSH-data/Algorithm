@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- // function solution(n) {
+        //     let tmp = n.toString(2).split("").reverse().indexOf("0")
+        //     if(tmp !== -1) {
+        //         if(tmp === 0) {
+        //             if((n+1).toString(2).includes("0")) return (n<<1)-(n+1)/2 + 1
+        //             else 
+        //         } else {
+        //            return n + 2**tmp - 2**(tmp-1)
+        //         }
+        //     } else {
+        //         return (n<<1)-(n+1)/2 + 1
+        //     }
+        // } -->
+    <script>
+      function solution(n) {
+        const count = change(n);
+        while (true) {
+          if (change(++n) === count) return n;
+        }
+      }
+      function change(n) {
+        const tmp = n.toString(2).split("");
+        let cnt = 0;
+        for (let x of tmp) {
+          if (x === "1") cnt++;
+        }
+        return cnt;
+      }
+    </script>
+  </body>
+</html>
