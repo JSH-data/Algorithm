@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const solution = (m, n, board) => {
+        board = board.map((v) => v.split(""));
+
+        while (true) {
+          const arr = [];
+          for (let i = 0; i < m - 1; i++) {
+            // 행과 열 각각의 맨 마지막 줄은 고려하지 않아도 됩니다.
+            for (let j = 0; j < n - 1; j++) {
+              if (
+                board[i][j] &&
+                board[i][j] === board[i + 1][j] &&
+                board[i][j] === board[i + 1][j + 1] &&
+                board[i][j] === board[i][j + 1]
+              )
+                arr.push([i, j]);
+            }
+          }
+          if (!arr.length) return [].concat(...board).filter((v) => !v).length;
+
+          for (let i = 0; i < arr.length; i++) {
+            const row = arr[i][0];
+            const col = arr[i][1];
+            board[row][col] = 0;
+            board[row + 1][col] = 0;
+            board[row][col + 1] = 0;
+            board[row + 1][col + 1] = 0;
+          }
+
+          for (let i = m - 1; i > 0; i--) {
+            if (!board[i].some((v) => !v)) continue;
+            // 맨아래부터 확인합니다. 만약 0이 하나라도 있다면 true를 반환합니다.
+            // 여기서는 0이 하나라도 없다면 아래의 작업을 하지 않고 건너뛰는 작업을 합니다.
+            for (let j = 0; j < n; j++) {
+              for (let k = i - 1; k >= 0 && !board[i][j]; k--) {
+                // !board[i][j]는 현재 0인것만 값을 바꿔주기위한 장치입니다.
+                if (board[k][j]) {
+                  console.log(i, j, k);
+                  board[i][j] = board[k][j];
+                  board[k][j] = 0;
+                  break;
+                }
+              }
+            }
+          }
+        }
+      };
+    </script>
+  </body>
+</html>
