@@ -1,0 +1,24 @@
+<html>
+  <script>
+    function solution(numbers) {
+      const answer = [];
+
+      for (let x of numbers) {
+        if (x % 2 === 0) answer.push(x + 1);
+        else {
+          const org = "0" + x.toString(2);
+
+          for (let i = org.length - 1; i >= 0; i--) {
+            if (org[i] === "0") {
+              answer.push(
+                parseInt(org.substring(0, i) + "10" + org.substring(i + 2), 2)
+              );
+              break;
+            }
+          }
+        }
+      }
+      return answer;
+    }
+  </script>
+</html>
