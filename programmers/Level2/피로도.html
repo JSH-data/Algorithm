@@ -1,0 +1,31 @@
+<html>
+  <body>
+    <script>
+      function solution(k, dungeons) {
+        let max = Number.MIN_SAFE_INTEGER;
+
+        function DFS(f, pass, nonPass) {
+          if (dungeons.length === pass.length + nonPass.length) {
+            max = max > pass.length ? max : pass.length;
+          } else {
+            for (let i = 0; i < dungeons.length; i++) {
+              if (!pass.includes(i) && !nonPass.includes(i)) {
+                if (f >= dungeons[i][0]) {
+                  pass.push(i);
+                  DFS(f - dungeons[i][1], pass, nonPass);
+                  pass.pop();
+                } else {
+                  nonPass.push(i);
+                  DFS(f, pass, nonPass);
+                  nonPass.pop();
+                }
+              }
+            }
+          }
+        }
+        DFS(k, [], []);
+        return max;
+      }
+    </script>
+  </body>
+</html>
