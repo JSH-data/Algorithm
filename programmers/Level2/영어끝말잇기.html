@@ -1,0 +1,33 @@
+<html>
+  <body>
+    <script>
+      function solution(n, words) {
+        let person = "init";
+        const stack = [];
+        for (let i = 0; i < words.length; i++) {
+          if (stack.includes(words[i])) {
+            let tmp = (i + 1) % n;
+            if (tmp === 0) person = n;
+            else person = tmp;
+            break;
+          }
+          if (
+            i < words.length - 1 &&
+            words[i][words[i].length - 1] !== words[i + 1][0]
+          ) {
+            stack.push(words[i]);
+            let tmp = (i + 2) % n;
+            if (tmp === 0) person = n;
+            else person = tmp;
+            break;
+          }
+
+          stack.push(words[i]);
+        }
+        if (person === "init") return [0, 0];
+
+        return [person, Math.floor(stack.length / n) + 1];
+      }
+    </script>
+  </body>
+</html>
