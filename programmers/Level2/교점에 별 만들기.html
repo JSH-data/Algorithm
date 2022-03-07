@@ -1,0 +1,44 @@
+<html>
+  <script>
+    function solution(line) {
+      const crossArr = [];
+      let xLow = Number.MAX_SAFE_INTEGER;
+      let xMax = Number.MIN_SAFE_INTEGER;
+      let yLow = Number.MAX_SAFE_INTEGER;
+      let yMax = Number.MIN_SAFE_INTEGER;
+
+      for (let i = 0; i < line.length - 1; i++) {
+        for (let j = i + 1; j < line.length; j++) {
+          const isRight = line[i][0] * line[j][1] - line[i][1] * line[j][0];
+          if (isRight === 0) continue;
+          const x =
+            (line[i][1] * line[j][2] - line[i][2] * line[j][1]) / isRight;
+          const y =
+            (line[i][2] * line[j][0] - line[i][0] * line[j][2]) / isRight;
+
+          if (Number.isInteger(x) && Number.isInteger(y)) {
+            crossArr.push([x, y]);
+
+            if (x < xLow) xLow = x;
+            if (x > xMax) xMax = x;
+            if (y < yLow) yLow = y;
+            if (y > yMax) yMax = y;
+          }
+        }
+      }
+      const w = xMax - xLow;
+      const h = yMax - yLow;
+
+      const answer = Array.from({ length: h + 1 }, () =>
+        Array(w + 1).fill(".")
+      );
+
+      for (let cord of crossArr) {
+        answer[Math.abs(cord[1] - yMax)][Math.abs(Math.abs(cord[0] - xLow))] =
+          "*";
+      }
+
+      return answer.map((v) => v.join(""));
+    }
+  </script>
+</html>

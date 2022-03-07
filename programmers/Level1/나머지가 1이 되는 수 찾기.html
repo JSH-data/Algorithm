@@ -1,0 +1,16 @@
+<html>
+  <script>
+    function solution(n) {
+      const tmp = n - 1;
+
+      const answer = [];
+
+      for (let i = 1; i < tmp / 2; i++) {
+        if (tmp % i === 0) answer.push(i);
+      }
+
+      if (answer.length === 1) return tmp;
+      else return answer[1];
+    }
+  </script>
+</html>

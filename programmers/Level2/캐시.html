@@ -1,0 +1,23 @@
+<html>
+  <script>
+    function solution(cacheSize, cities) {
+      const cacheArr = [];
+      const upCities = cities.map((v) => v.toUpperCase());
+      let time = 0;
+
+      upCities.forEach((city) => {
+        const cIdx = cacheArr.indexOf(city);
+        if (cIdx !== -1) {
+          time += 1;
+          cacheArr.splice(cIdx, 1);
+          cacheArr.unshift(city);
+        } else {
+          time += 5;
+          cacheArr.unshift(city);
+          if (cacheArr.length > cacheSize) cacheArr.pop();
+        }
+      });
+      return time;
+    }
+  </script>
+</html>

@@ -1,0 +1,48 @@
+<html>
+  <script>
+    function solution(n, info) {
+      let maxDiff = 0; // 최대값
+
+      let ryonInfo = Array(11).fill(0); // 라이언의 INFO
+
+      function DFS(aScore, rScore, arrow, pointIdx, ryonBoard) {
+        if (n < arrow) return; // 화살을 더 많이 소비한경우 제외
+
+        if (pointIdx > 10) {
+          const diff = rScore - aScore;
+          if (diff > maxDiff) {
+            ryonBoard[10] = n - arrow; // 남은 화살의 소진 제한사항을 만족하기 위함
+            maxDiff = diff;
+            ryonInfo = ryonBoard;
+          }
+          return;
+        }
+
+        if (n > arrow) {
+          // 남은 화살이 있을때 라이언이 점수를 내기 위한 경우
+          let newBoard = [...ryonBoard];
+          newBoard[10 - pointIdx] = info[10 - pointIdx] + 1;
+          DFS(
+            aScore,
+            rScore + pointIdx,
+            arrow + info[10 - pointIdx] + 1,
+            pointIdx + 1,
+            newBoard
+          );
+        }
+
+        if (info[10 - pointIdx] > 0) {
+          // 어피치가 점수를 얻는 경우
+          DFS(aScore + pointIdx, rScore, arrow, pointIdx + 1, ryonBoard);
+        } else {
+          // 모두 점수를 못얻는 경우
+          DFS(aScore, rScore, arrow, pointIdx + 1, ryonBoard);
+        }
+      }
+
+      DFS(0, 0, 0, 0, ryonInfo);
+
+      return maxDiff <= 0 ? [-1] : ryonInfo;
+    }
+  </script>
+</html>

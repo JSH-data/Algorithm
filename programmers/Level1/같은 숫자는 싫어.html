@@ -1,0 +1,18 @@
+<html>
+  <script>
+    function solution(arr) {
+      const answer = [];
+
+      let tmp = null;
+
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] !== tmp) {
+          answer.push(arr[i]);
+          tmp = arr[i];
+        }
+      }
+
+      return answer;
+    }
+  </script>
+</html>

@@ -1,0 +1,9 @@
+<html>
+  <script>
+    function solution(a, b) {
+      let tmp = a - b > 0 ? [a - b, b] : [b - a, a];
+
+      return tmp[1] * (tmp[0] + 1) + (tmp[0] * (tmp[0] + 1)) / 2;
+    }
+  </script>
+</html>

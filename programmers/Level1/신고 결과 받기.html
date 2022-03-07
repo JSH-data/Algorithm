@@ -1,0 +1,27 @@
+<html>
+  <script>
+    function solution(id_list, report, k) {
+      const data = {};
+      const answer = new Array(id_list.length).fill(0);
+
+      for (let i = 0; i < id_list.length; i++) data[id_list[i]] = [0, []];
+
+      const splitArr = report.map((v) => v.split(" "));
+
+      splitArr.forEach((v) => {
+        if (!data[v[1]][1].includes(v[0])) {
+          data[v[1]][0] += 1;
+          data[v[1]][1].push(v[0]);
+        }
+      });
+
+      for (const [key, value] of Object.entries(data)) {
+        if (value[0] >= k) {
+          value[1].forEach((v) => (answer[id_list.indexOf(v)] += 1));
+        }
+      }
+
+      return answer;
+    }
+  </script>
+</html>

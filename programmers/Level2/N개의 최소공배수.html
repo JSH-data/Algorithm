@@ -1,0 +1,65 @@
+<html>
+  <script>
+    // 나의 풀이 첫번째
+    function solution1(arr) {
+      const answerObj = {};
+      for (let x of arr) {
+        let tmp = x;
+        let isPrime = false;
+        const obj = {};
+
+        while (!isPrime) {
+          if (tmp === 2) {
+            if (obj[2]) obj[2]++;
+            else obj[2] = 1;
+            break;
+          }
+
+          if (tmp === 1) break;
+
+          const sqrt = Math.ceil(Math.sqrt(tmp));
+
+          for (let i = 2; i <= sqrt; i++) {
+            if (tmp % i === 0) {
+              if (obj[i]) obj[i]++;
+              else obj[i] = 1;
+              tmp = tmp / i;
+              break;
+            }
+            if (i == sqrt) {
+              if (obj[tmp]) obj[tmp]++;
+              else obj[tmp] = 1;
+              isPrime = true;
+            }
+          }
+        }
+        for (let [key, value] of Object.entries(obj)) {
+          if (
+            answerObj[key] == undefined ||
+            (answerObj[key] != undefined && answerObj[key] < value)
+          ) {
+            answerObj[key] = value;
+          }
+        }
+      }
+
+      let answer = 1;
+
+      for (let [key, value] of Object.entries(answerObj)) {
+        let pow = key ** value;
+        answer *= pow;
+      }
+      return answer;
+    }
+
+    function getGcd(a, b) {
+      // 최대 공약수를 재귀함수로 구할 수 있습니다.
+      if (b === 0) return a;
+      return getGcd(b, a % b);
+    }
+
+    function solution2(arr) {
+      return arr.reduce((a, b) => (a * b) / getGcd(a, b)); // 최대공배수를 구해나갑니다.
+    }
+  </script>
+</html>

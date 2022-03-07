@@ -1,0 +1,30 @@
+<html>
+  <script>
+    function solution(N, number) {
+      // 예외 케이스
+      if (N === number) return 1;
+
+      // 각 원소는 계산될 수 있는 값이다. 5를 연속으로 붙이는 경우를 미리 삽입합니다.
+      const dp = Array.from(
+        { length: 9 },
+        (v, i) => new Set([parseInt((N + "").repeat(i))])
+      );
+
+      // 8을 넘어가면 -1을 반환해야합니다.
+      for (let i = 2; i <= 8; i++) {
+        for (let j = 1; j < i; j++) {
+          for (let item1 of dp[j]) {
+            for (let item2 of dp[i - j]) {
+              dp[i].add(item1 + item2);
+              dp[i].add(item1 * item2);
+              dp[i].add(item1 / item2);
+              dp[i].add(item1 - item2);
+            }
+          }
+        }
+        if (dp[i].has(number)) return i;
+      }
+      return -1;
+    }
+  </script>
+</html>

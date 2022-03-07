@@ -1,0 +1,18 @@
+<html>
+  <script>
+    function solution(s) {
+      const low = s.toLowerCase();
+
+      let pNum = 0;
+      let yNum = 0;
+
+      for (let i = 0; i < low.length; i++) {
+        if ("p" === low[i]) pNum++;
+        else if ("y" === low[i]) yNum++;
+      }
+
+      if (pNum === yNum) return true;
+      else return false;
+    }
+  </script>
+</html>
