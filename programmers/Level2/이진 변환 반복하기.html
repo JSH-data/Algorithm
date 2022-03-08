@@ -1,0 +1,19 @@
+<html>
+  <script>
+    function solution(s) {
+      let tCnt = 0;
+      let zCnt = 0;
+      let result = s;
+
+      while (result != "1") {
+        let mat = result.match(/0/g);
+        if (mat !== null) zCnt += mat.length;
+        let tmp = result.replace(/0/g, "").length;
+        result = tmp.toString(2);
+        tCnt++;
+      }
+
+      return [tCnt, zCnt];
+    }
+  </script>
+</html>
