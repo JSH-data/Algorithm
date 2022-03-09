@@ -1,0 +1,21 @@
+<html>
+  <script>
+    function solution(skill, skill_trees) {
+      let answer = 0;
+
+      for (let trees of skill_trees) {
+        let arr = [];
+        for (let i = 0; i < skill.length; i++)
+          arr.push(trees.indexOf(skill[i]));
+        const test = arr.reduce((a, b) => {
+          if ((a === -1 && b !== -1) || a === false) return false;
+          if ((a === -1 && b === -1) || (a !== -1 && b === -1)) return -1;
+          if (a < b) return b;
+          if (a > b) return false;
+        });
+        if (test !== false) answer++;
+      }
+      return answer;
+    }
+  </script>
+</html>

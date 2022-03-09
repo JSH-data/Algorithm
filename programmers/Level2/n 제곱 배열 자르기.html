@@ -1,0 +1,37 @@
+<html>
+  <script>
+    function test(n, left, right) {
+      const arr = Array.from({ length: n }, () => new Array(n));
+
+      for (let i = 1; i <= n; i++) {
+        for (let x = 0; x < i; x++) arr[x][i - 1] = i;
+        for (let y = 0; y < i - 1; y++) arr[i - 1][y] = i;
+      }
+
+      let answer = [];
+
+      const start = [Math.floor(left / n), left % n];
+      const end = [Math.floor(right / n), right % n];
+
+      answer.push(...arr[start[0]].slice(start[1]));
+
+      for (let i = start[0] + 1; i < end[0]; i++) answer.push(...arr[i]);
+
+      answer.push(...arr[end[0]].slice(0, end[1] + 1));
+
+      return answer;
+    }
+
+    function solution(n, left, right) {
+      const answer = [];
+
+      for (let i = left; i <= right; i++) {
+        let x = Math.floor(i / n);
+        let y = i % n;
+        answer.push(Math.max(x, y) + 1);
+      }
+
+      return answer;
+    }
+  </script>
+</html>
