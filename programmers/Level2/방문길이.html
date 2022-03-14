@@ -1,0 +1,30 @@
+<html>
+  <script>
+    function solution(dirs) {
+      let curX = 0;
+      let curY = 0;
+      let arr = [];
+      for (let i = 0; i < dirs.length; i++) {
+        let start = "" + curX + curY;
+        let move;
+
+        if (dirs[i] === "U" && curY + 1 <= 5) {
+          let tmp = curX + `${++curY}`;
+          move = tmp > start ? tmp + start : start + tmp;
+        } else if (dirs[i] === "L" && curX - 1 >= -5) {
+          let tmp = `${--curX}` + curY;
+          move = tmp > start ? tmp + start : start + tmp;
+        } else if (dirs[i] === "R" && curX + 1 <= 5) {
+          let tmp = `${++curX}` + curY;
+          move = tmp > start ? tmp + start : start + tmp;
+        } else if (dirs[i] === "D" && curY - 1 >= -5) {
+          let tmp = curX + `${--curY}`;
+          move = tmp > start ? tmp + start : start + tmp;
+        }
+        if (move && !arr.includes(move)) arr.push(move);
+      }
+
+      return arr.length;
+    }
+  </script>
+</html>

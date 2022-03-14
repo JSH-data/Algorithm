@@ -1,0 +1,81 @@
+<html>
+  <script>
+    function solution(arr) {
+      const answer = [0, 0];
+
+      function devide(arr) {
+        const len = arr.length / 2;
+
+        const one = [];
+        const two = [];
+        const three = [];
+        const four = [];
+
+        for (let x = 0; x < len; x++) {
+          one.push(arr[x].slice(0, len));
+          two.push(arr[x].slice(len));
+        }
+        for (let x = len; x < arr.length; x++) {
+          three.push(arr[x].slice(0, len));
+          four.push(arr[x].slice(len));
+        }
+
+        const c1 = press(one);
+        const c2 = press(two);
+        const c3 = press(three);
+        const c4 = press(four);
+
+        if (c1[0] === c2[0] && c1[0] === c3[0] && c1[0] === c4[0]) {
+          answer[c1[0]]++;
+          return;
+        }
+
+        if (c1 == false) devide(one);
+        else answer[c1[0]]++;
+        if (c2 == false) devide(two);
+        else answer[c2[0]]++;
+        if (c3 == false) devide(three);
+        else answer[c3[0]]++;
+        if (c4 == false) devide(four);
+        else answer[c4[0]]++;
+      }
+
+      function press(arr) {
+        if (arr.length === 1) {
+          if (arr[0][0] === 0) return [0, true];
+          else return [1, true];
+        }
+
+        const standard = arr[0].reduce((a, b) => a + b, 0);
+
+        if (standard !== arr[0].length && standard !== 0) return false;
+
+        for (let i = 1; i < arr.length; i++) {
+          const tmp = arr[i].reduce((a, b) => a + b, 0);
+          if (tmp != standard) return false;
+        }
+
+        if (standard === 0) return [0, true];
+        else return [1, true];
+      }
+
+      devide(arr);
+
+      return answer;
+    }
+
+    function solution(arr) {
+      if (arr.every((row) => row.every((cell) => cell === 0))) return [1, 0];
+      if (arr.every((row) => row.every((cell) => cell === 1))) return [0, 1];
+      const len = arr.length;
+      const q1 = arr.splice(0, len / 2);
+      const q2 = q1.map((row) => row.splice(len / 2, len / 2));
+      const q3 = arr;
+      const q4 = q3.map((row) => row.splice(len / 2, len / 2));
+      return [q1, q2, q3, q4].reduce(
+        (ans, x) => solution(x).map((d, i) => d + ans[i]),
+        [0, 0]
+      );
+    }
+  </script>
+</html>
