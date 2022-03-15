@@ -1,0 +1,54 @@
+<html>
+  <script>
+    function solution(m, musicinfos) {
+      function clear(music) {
+        // 아래 복잡한 부분은 정리 가능 replace(/[A-Z]#/g,m => m[0].toLowerCase());
+        return music
+          .replace(/C#/g, "c")
+          .replace(/D#/g, "d")
+          .replace(/F#/g, "f")
+          .replace(/G#/g, "g")
+          .replace(/A#/g, "a");
+      }
+
+      function getFullMusic(start, end, code) {
+        const h1 = Number(start.substring(0, 2));
+        const s1 = Number(start.substring(3));
+        const h2 = Number(end.substring(0, 2));
+        const s2 = Number(end.substring(3));
+
+        let time = 0;
+        if (h2 - h1 == 0) time = s2 - s1;
+        else time = (h2 - h1) * 60 + s2 - s1;
+
+        const min = Math.floor(time / code.length);
+        const sec = time % code.length;
+
+        return `${code.repeat(min)}${code.substring(0, sec)}`;
+      }
+
+      const arr = musicinfos.map((v) => v.split(","));
+
+      const musics = [];
+      const cM = clear(m);
+      for (let music of arr) {
+        const cMusic = clear(music[3]);
+
+        const fullMusic = getFullMusic(music[0], music[1], cMusic);
+
+        if (fullMusic.includes(cM)) musics.push([music[2], fullMusic.length]);
+      }
+
+      if (musics.length === 1) return musics[0][0];
+      else if (musics.length === 0) return "(None)";
+      else {
+        let tmp = musics.sort((a, b) => {
+          if (a[1] - b[1] > 0) return -1;
+          else if (a[1] - b[1] < 0) return 0;
+          else return 0;
+        });
+        return tmp[0][0];
+      }
+    }
+  </script>
+</html>

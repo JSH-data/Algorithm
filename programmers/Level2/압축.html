@@ -1,0 +1,32 @@
+<html>
+  <script>
+    function dictionary() {
+      const dic = new Map();
+      for (let i = 65; i <= 90; i++) {
+        dic.set(String.fromCharCode(i), i - 64);
+      }
+      return dic;
+    }
+
+    function solution(msg) {
+      const answer = [];
+      const dic = dictionary();
+
+      for (let i = 0; i < msg.length; i++) {
+        let crt = msg[i];
+        let idx;
+        let j = -1;
+        while (dic.has(crt)) {
+          j++;
+          idx = dic.get(crt);
+          crt += msg[i + j + 1];
+        }
+        answer.push(idx);
+        dic.set(crt, dic.size + 1);
+        i += j;
+      }
+
+      return answer;
+    }
+  </script>
+</html>

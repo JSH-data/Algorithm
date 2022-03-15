@@ -1,0 +1,26 @@
+<html>
+  <script>
+    function solution1(n) {
+      let answer = 0;
+      for (let i = 1; i <= n; i++) {
+        let tmp = 0;
+        let s = i;
+        while (tmp < n) {
+          tmp += s;
+          s++;
+        }
+        if (tmp === n) answer++;
+      }
+      return answer;
+    }
+
+    function solution2(num) {
+      var answer = 0;
+
+      for (var i = 1; i <= num; i++) {
+        if (num % i == 0 && i % 2 == 1) answer++;
+      }
+      return answer;
+    }
+  </script>
+</html>
