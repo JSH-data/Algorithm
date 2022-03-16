@@ -1,0 +1,20 @@
+<html>
+  <script>
+    function solution(n, t, m, p) {
+      let answer = "";
+      let origin = "";
+      const limit = (t - 1) * m + p;
+      let num = 0;
+      while (origin.length < limit) {
+        const tmp = num.toString(n);
+        origin += tmp;
+        num++;
+      }
+      for (let i = 0; i < origin.length; i++) {
+        if (i % m == p - 1) answer += origin[i];
+        if (answer.length === t) break;
+      }
+      return answer.toUpperCase();
+    }
+  </script>
+</html>

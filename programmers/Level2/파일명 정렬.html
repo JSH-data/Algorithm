@@ -1,0 +1,69 @@
+<html>
+  <script>
+    function solution1(files) {
+      let list = [];
+      for (let f of files) list.push(devide(f));
+
+      return list.sort((a, b) => sorting(a, b)).map((v) => v.join(""));
+    }
+
+    function sorting(a, b) {
+      let aX = a[0].toUpperCase();
+      let bX = b[0].toUpperCase();
+      let aY = Number(a[1]);
+      let bY = Number(b[1]);
+
+      if (aX < bX) {
+        // 오름차순 b가 클 때 음수!
+        return -1;
+      } else if (aX > bX) {
+        return 1;
+      } else {
+        if (aY < bY) {
+          return -1;
+        } else if (aY > bY) {
+          return 1;
+        } else return 0;
+      }
+    }
+
+    function devide(f) {
+      let idx;
+      let head = "";
+      for (let i = 0; i < f.length; i++) {
+        const h = f[i].charCodeAt();
+        if (h >= 48 && h <= 57) {
+          idx = i;
+          break;
+        }
+        head += f[i];
+      }
+      let number = "";
+      for (let i = idx; i < f.length; i++) {
+        const n = f[i].charCodeAt();
+        if (number.length === 5 || n < 48 || n > 57) {
+          idx = i;
+          break;
+        }
+        if (n >= 48 && n <= 57) number += f[i];
+      }
+      let tail = "";
+      if ((number + head).length != f.length) tail = f.slice(idx);
+      return [head, number, tail];
+    }
+
+    function solution2(files) {
+      return files.sort((a, b) => {
+        const regex = /^(\D+)(\d{1,5})(?:.*)$/;
+        const [, aHead, aNumber] = a.match(regex);
+        const [, bHead, bNumber] = b.match(regex);
+        const compareHead = aHead
+          .toLowerCase()
+          .localeCompare(bHead.toLowerCase());
+        // a와 b의 비교 음수라면 b가 큰 경우 양수라면 a가 큰 경우
+        // 오름차순을 만들기 위함
+        return compareHead || +aNumber - +bNumber;
+      });
+    }
+  </script>
+</html>
