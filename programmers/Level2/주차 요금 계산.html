@@ -1,0 +1,44 @@
+<html>
+  <script>
+    function solution(fees, records) {
+      const dTime = fees[0];
+      const dFee = fees[1];
+      const uTime = fees[2];
+      const uFee = fees[3];
+
+      let record = {};
+
+      for (let i = 0; i < records.length; i++) {
+        const tmp = records[i].split(" ");
+        if (record[tmp[1]] !== undefined) record[tmp[1]].push(tmp[0]);
+        else record[tmp[1]] = [tmp[0]];
+      }
+
+      let answer = [];
+
+      for (let [x, y] of Object.entries(record)) {
+        let time = 0;
+        for (let i = 1; i < y.length; i += 2) {
+          let t1 = y[i].split(":");
+          let t2 = y[i - 1].split(":");
+
+          let h = +t1[0] - +t2[0];
+          time += h * 60 + +t1[1] - +t2[1];
+        }
+        if (y.length % 2 != 0) {
+          let last = y[y.length - 1].split(":");
+          let lH = 23 - +last[0];
+          time += lH * 60 + 59 - +last[1];
+        }
+        let total;
+        if (time > dTime)
+          total = dFee + Math.ceil((time - dTime) / uTime) * uFee;
+        else total = dFee;
+
+        answer.push([total, x]);
+      }
+
+      return answer.sort((a, b) => a[1] - b[1]).map((v) => v[0]);
+    }
+  </script>
+</html>

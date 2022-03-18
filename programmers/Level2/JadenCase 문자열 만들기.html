@@ -1,0 +1,11 @@
+<html>
+  <script>
+    function solution(s) {
+      const arr = s.split(" ");
+
+      return arr
+        .map((v) => v.charAt(0).toUpperCase() + v.substring(1).toLowerCase())
+        .join(" ");
+    }
+  </script>
+</html>
