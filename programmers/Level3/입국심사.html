@@ -1,0 +1,20 @@
+<html>
+  <script>
+    function solution(n, times) {
+      times.sort((a, b) => a - b);
+      let left = 0;
+      let right = n * times[times.length - 1];
+      let mid = Math.floor((left + right) / 2);
+
+      while (left <= right) {
+        const person = times.reduce((a, b) => Math.floor(mid / b) + a, 0);
+
+        if (person >= n) right = mid - 1;
+        else left = mid + 1;
+
+        mid = Math.floor((left + right) / 2);
+      }
+      return left;
+    }
+  </script>
+</html>

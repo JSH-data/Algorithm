@@ -1,0 +1,29 @@
+<html>
+  <script>
+    function solution(lines) {
+      const arr = [];
+      for (let i = 0; i < lines.length; i++) {
+        const [day, complete, time] = lines[i].split(" ");
+
+        const [h, m, s] = complete.split(":");
+
+        const duration = time.substring(0, time.length - 1);
+        const end = +h * 3600 + +m * 60 + +s;
+        const start = +(end - duration).toFixed(3);
+
+        arr[i] = [start, end];
+      }
+      let max = 0;
+      for (let i = 0; i < arr.length; i++) {
+        let tmp = 1;
+        for (let j = i + 1; j < arr.length; j++) {
+          const valid = +(arr[i][1] + 0.999).toFixed(3);
+          if (valid >= arr[j][1]) tmp++;
+          else if (valid > arr[j][0]) tmp++;
+        }
+        max = max > tmp ? max : tmp;
+      }
+      return max;
+    }
+  </script>
+</html>
