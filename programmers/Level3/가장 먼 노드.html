@@ -1,0 +1,30 @@
+<html>
+  <script>
+    function solution(n, edge) {
+      const g = Array.from({ length: n }, () => []);
+
+      edge.forEach((v) => {
+        g[v[0] - 1].push(v[1] - 1);
+        g[v[1] - 1].push(v[0] - 1);
+      }); // 굳이 2차원 배열 전체를 만들지 않다도 된다
+
+      const visited = [0]; // 방문한 노드의 거리를 담는 배열
+      const queue = [0]; // 방문해야할 노드를 담는 배열
+
+      while (queue.length) {
+        const cur = queue.shift();
+
+        for (let next of g[cur]) {
+          // 현재 방문한 노드에서 갈 수 있는곳
+          if (visited[next] == undefined) {
+            // 방문하지 않은 노드만 가야합니다.
+            visited[next] = visited[cur] + 1; // 현재 거리에서 + 1
+            queue.push(next); // 다음으로 방문하기 위해 삽입
+          }
+        }
+      }
+      const max = Math.max(...visited);
+      return visited.filter((v) => max === v).length;
+    }
+  </script>
+</html>

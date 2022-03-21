@@ -1,0 +1,34 @@
+<html>
+  <script>
+    function solution(n, computers) {
+      const com = Array.from({ length: n }, () => []);
+      let answer = 0;
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+          if (i !== j && computers[i][j]) {
+            com[i].push(j);
+          }
+        }
+      }
+
+      const visited = [];
+
+      for (let i = 0; i < n; i++) {
+        if (visited.includes(i)) continue;
+        answer++;
+        const queue = [i];
+        visited.push(i);
+        while (queue.length) {
+          const cur = queue.shift();
+          for (let next of com[cur]) {
+            if (!visited.includes(next)) {
+              visited.push(next);
+              queue.push(next);
+            }
+          }
+        }
+      }
+      return answer;
+    }
+  </script>
+</html>
