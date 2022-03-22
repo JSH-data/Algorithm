@@ -1,0 +1,29 @@
+<html>
+  <script>
+    function solution(enroll, referral, seller, amount) {
+      const rel = {};
+
+      for (let i = 0; i < enroll.length; i++) {
+        if (referral[i] == "-") rel[enroll[i]] = ["center", 0];
+        else rel[enroll[i]] = [referral[i], 0];
+      }
+
+      for (let i = 0; i < seller.length; i++) {
+        const profit = amount[i] * 100;
+        let next = rel[seller[i]][0];
+        let left = Math.floor(profit * 0.1);
+        rel[seller[i]][1] += profit - left;
+        while (next !== "center" && left) {
+          let tmp = Math.floor(left * 0.1);
+          rel[next][1] += left - tmp;
+          left = tmp;
+          next = rel[next][0];
+        }
+      }
+
+      const answer = [];
+      for (let i = 0; i < enroll.length; i++) answer.push(rel[enroll[i]][1]);
+      return answer;
+    }
+  </script>
+</html>

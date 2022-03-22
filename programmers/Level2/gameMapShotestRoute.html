@@ -1,50 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-        function solution(maps) {
-            let answer = -1;
-            let xpos = [0,0,1,-1];
-            let ypos = [1,-1,0,0];
-        
-            const q = [[0,0,1]];
-            while(q.length != 0){
-                let val = q.shift()
-                let y=val[0];
-                let x=val[1];
-                let cnt=val[2];
-                if (y === maps.length-1 && x === maps[0].length-1){
-                    answer = cnt
-                    break;
-                }
-                for(let i = 0; i < 4;i++){
-                    let yy = y + ypos[i];
-                    let xx = x + xpos[i];
-        
-                    if (yy < 0 || xx < 0 || xx>=maps[0].length || yy>=maps.length){
-                    continue
-                    }
-                    if(maps[yy][xx] ==0 ){
-                        continue
-                    }
-                    if(maps[yy][xx] ==2 ){
-                        continue
-                    }
-                    maps[yy][xx] =2
-                    q.push([yy,xx,cnt+1])
-                }
-            }
-            return answer;
-        }
+      function solution(maps) {
+        let answer = -1;
+        let xpos = [0, 0, 1, -1];
+        let ypos = [1, -1, 0, 0];
 
-        const maps = [[1,0,1,1,1],[1,0,1,0,1],[1,0,1,1,1],[1,1,1,0,1],[0,0,0,0,1]]
-        console.log(solution(maps))
+        const q = [[0, 0, 1]];
+        while (q.length != 0) {
+          let val = q.shift();
+          let y = val[0];
+          let x = val[1];
+          let cnt = val[2];
+          if (y === maps.length - 1 && x === maps[0].length - 1) {
+            answer = cnt;
+            break;
+          }
+          for (let i = 0; i < 4; i++) {
+            let yy = y + ypos[i];
+            let xx = x + xpos[i];
+
+            if (yy < 0 || xx < 0 || xx >= maps[0].length || yy >= maps.length) {
+              continue;
+            }
+            if (maps[yy][xx] == 0) {
+              continue;
+            }
+            if (maps[yy][xx] == 2) {
+              continue;
+            }
+            maps[yy][xx] = 2;
+            q.push([yy, xx, cnt + 1]);
+          }
+        }
+        return answer;
+      }
+
+      const maps = [
+        [1, 0, 1, 1, 1],
+        [1, 0, 1, 0, 1],
+        [1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1],
+        [0, 0, 0, 0, 1],
+      ];
+      console.log(solution(maps));
+
+      function solution2(maps) {
+        const yLen = maps[0].length - 1;
+        const xLen = maps.length - 1;
+        const dX = [1, 0, -1, 0];
+        const dY = [0, 1, 0, -1];
+
+        const queue = [[0, 0, 1]];
+
+        while (queue.length) {
+          const [curX, curY, dis] = queue.shift();
+          if (curX === xLen && curY === yLen) return dis;
+          maps[curX][curY] = 0;
+          for (let i = 0; i < 4; i++) {
+            const x = curX + dX[i];
+            const y = curY + dY[i];
+            if (x >= 0 && x <= xLen && y >= 0 && y <= yLen && maps[x][y] !== 0)
+              queue.push([x, y, dis + 1]);
+          }
+        }
+        return -1;
+      }
     </script>
-</body>
+  </body>
 </html>

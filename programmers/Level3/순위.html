@@ -1,0 +1,40 @@
+<html>
+  <script>
+    function solution(n, results) {
+      let answer = 0;
+
+      const range = Array.from({ length: n }, (_, i) => i + 1);
+
+      const wins = {};
+      const loses = {};
+
+      range.map((key) => {
+        wins[key] = new Set([]);
+        loses[key] = new Set([]);
+      });
+
+      results.map((val) => {
+        const [winner, loser] = val;
+        wins[winner].add(loser);
+        loses[loser].add(winner);
+      });
+
+      range.map((i) => {
+        for (let winner of loses[i]) {
+          for (let loser of wins[i]) {
+            wins[winner].add(loser);
+          }
+        }
+        for (let loser of wins[i]) {
+          for (let winner of loses[i]) {
+            loses[loser].add(winner);
+          }
+        }
+      });
+
+      for (let i = 1; i < n + 1; i++)
+        if (wins[i].size + loses[i].size === n - 1) answer++;
+      return answer;
+    }
+  </script>
+</html>
