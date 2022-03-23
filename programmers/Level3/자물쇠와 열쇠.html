@@ -1,0 +1,63 @@
+<html>
+  <script>
+    function rotate(key) {
+      const len = key.length;
+      const newKey = Array.from({ length: len }, () => Array(len));
+      for (let i = 0; i < len; i++) {
+        for (let j = 0; j < len; j++) {
+          newKey[j][len - i - 1] = key[i][j];
+        }
+      }
+      return newKey;
+    }
+
+    function check(arr, M, len) {
+      for (let i = M - 1; i <= len - M; i++) {
+        for (let j = M - 1; j <= len - M; j++) {
+          if (arr[i][j] !== 1) return false;
+        }
+      }
+      return true;
+    }
+
+    function solution(key, lock) {
+      const M = key.length;
+      const N = lock.length;
+
+      const extend = Array.from({ length: 2 * M + N - 2 }, () =>
+        new Array(2 * M + N - 2).fill(null)
+      );
+
+      for (let i = M - 1; i < M + N - 1; i++) {
+        for (let j = M - 1; j < M + N - 1; j++) {
+          extend[i][j] = lock[i - M + 1][j - M + 1];
+        }
+      }
+
+      for (let r = 0; r < 4; r++) {
+        key = rotate(key);
+        for (let x = 0; x < M + N - 1; x++) {
+          for (let y = 0; y < M + N - 1; y++) {
+            const newExtend = extend.map((v) => v.slice());
+
+            for (let i = 0; i < M; i++) {
+              for (let j = 0; j < M; j++) {
+                if (newExtend[x + i][y + j] === 0 && key[i][j] === 1)
+                  newExtend[x + i][y + j] = 1;
+                else if (newExtend[x + i][y + j] === 1 && key[i][j] === 1)
+                  newExtend[x + i][y + j] = 2;
+                else if (newExtend[x + i][y + j] === 0 && key[i][j] === 0)
+                  newExtend[x + i][y + j] = 0;
+                else if (newExtend[x + i][y + j] === 1 && key[i][j] === 0)
+                  newExtend[x + i][y + j] = 1;
+                else newExtend[x + i][y + j] = 0;
+              }
+            }
+            if (check(newExtend, M, newExtend.length)) return true;
+          }
+        }
+      }
+      return false;
+    }
+  </script>
+</html>
