@@ -1,0 +1,116 @@
+<html>
+  <script>
+    function up(arr, crt, x) {
+      while (x) {
+        crt--;
+        if (arr[crt] == "O") --x;
+      }
+      return crt;
+    }
+
+    function down(arr, crt, x) {
+      while (x) {
+        crt++;
+        if (arr[crt] == "O") --x;
+      }
+      return crt;
+    }
+
+    function del(arr, crt) {
+      arr[crt] = "X";
+      const downSide = arr.slice(crt + 1).indexOf("O");
+      const upSide = arr.slice(0, crt).lastIndexOf("O");
+      if (downSide !== -1) return downSide + crt + 1;
+      return upSide;
+    }
+
+    function solution2(n, k, cmd) {
+      const arr = new Array(n).fill("O");
+      let crt = k;
+      const stack = [];
+
+      for (let i = 0; i < cmd.length; i++) {
+        const [t, n] = cmd[i].split(" ");
+        if (t === "D") crt = down(arr, crt, +n);
+        else if (t === "C") {
+          stack.push(crt);
+          crt = del(arr, crt);
+        } else if (t === "U") crt = up(arr, crt, +n);
+        else if (t === "Z") {
+          const re = stack.pop();
+          arr[re] = "O";
+        }
+      }
+      return arr.join("");
+    }
+    function solution(n, k, cmd) {
+      const Node = function (index, prev) {
+        this.index = index;
+        this.prev = prev;
+        this.next = null;
+      };
+      let prevNode = new Node(0);
+      let select;
+
+      for (let i = 1; i < n; i++) {
+        const cntNode = new Node(i, prevNode);
+        prevNode.next = cntNode;
+        prevNode = cntNode;
+
+        if (i == k) select = cntNode;
+      }
+
+      let trashBin = [];
+
+      const moveSelectedNode = (count, direction) => {
+        for (let i = 0; i < count; i++) {
+          if (!select[direction]) break;
+          select = select[direction];
+        }
+      };
+
+      const deleteNode = () => {
+        const prev = select.prev;
+        const next = select.next;
+
+        trashBin.push(select);
+
+        select = next ? next : prev;
+
+        if (next) next.prev = prev;
+        if (prev) prev.next = next;
+      };
+      const recoverNode = () => {
+        const target = trashBin.pop();
+        const prev = target.prev;
+        const next = target.next;
+
+        if (prev) prev.next = target;
+        if (next) next.prev = target;
+      };
+
+      cmd.forEach((v) => {
+        switch (v[0]) {
+          case "U":
+            moveSelectedNode(v.split(" ")[1], "prev");
+            break;
+          case "D":
+            moveSelectedNode(v.split(" ")[1], "next");
+            break;
+          case "C":
+            deleteNode();
+            break;
+          case "Z":
+            recoverNode();
+            break;
+        }
+      });
+
+      const answer = new Array(n).fill("O");
+      trashBin.forEach((v) => {
+        answer[v.index] = "X";
+      });
+      return answer.join("");
+    }
+  </script>
+</html>

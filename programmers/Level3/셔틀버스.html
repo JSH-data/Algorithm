@@ -1,0 +1,35 @@
+<html>
+  <script>
+    function change(time) {
+      let h = Math.floor(time / 60);
+      let m = time % 60;
+
+      if (h < 10) h = "0" + h;
+      if (m < 10) m = "0" + m;
+      return h + ":" + m;
+    }
+
+    function solution(n, t, m, timetable) {
+      const busStart = Array.from({ length: n }, (_, i) => [540 + t * i, []]);
+      timetable = timetable
+        .map((v) => {
+          const [h, m] = v.split(":");
+          return +h * 60 + +m;
+        })
+        .sort((a, b) => a - b);
+
+      for (let i = 0; i < timetable.length; i++) {
+        for (let j = 0; j < busStart.length; j++) {
+          if (timetable[i] <= busStart[j][0] && busStart[j][1].length < m) {
+            busStart[j][1].push(timetable[i]);
+            break;
+          }
+        }
+      }
+
+      const last = busStart[busStart.length - 1][1].slice();
+      if (last.length < m) return change(busStart[busStart.length - 1][0]);
+      else return change(last[last.length - 1] - 1);
+    }
+  </script>
+</html>
