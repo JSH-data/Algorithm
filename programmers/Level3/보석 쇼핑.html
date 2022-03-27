@@ -1,0 +1,34 @@
+<html>
+  <script>
+    function solution(gems) {
+      const cnt = new Set(gems).size;
+
+      let ans = [1, gems.length];
+
+      const map = new Map();
+
+      map.set(gems[0], 1);
+
+      let l = 0,
+        r = 0;
+
+      while (r < gems.length) {
+        if (map.size === cnt) {
+          if (ans[1] - ans[0] > r - l) ans = [l + 1, r + 1]; // 더 좋은 답인 경우 r, l로 변경
+
+          map.set(gems[l], map.get(gems[l]) - 1); // l의 빈도수 감소
+
+          if (map.get(gems[l]) === 0) map.delete(gems[l]); // 0이면 삭제
+
+          l++; // l 증가
+        } else {
+          r++;
+          const right = map.get(gems[r]);
+          map.set(gems[r], right ? right + 1 : 1);
+        }
+      }
+
+      return ans;
+    }
+  </script>
+</html>
