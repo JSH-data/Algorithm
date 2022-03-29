@@ -1,0 +1,47 @@
+<html>
+  <script>
+    function solution(user_id, banned_id) {
+      const len = banned_id.length;
+      const ban = Array.from({ length: len }, () => new Array());
+
+      for (let i = 0; i < len; i++) {
+        for (let j = 0; j < user_id.length; j++) {
+          if (banned_id[i].length === user_id[j].length) {
+            let flag = true;
+            for (let k = 0; k < banned_id[i].length; k++) {
+              if (
+                banned_id[i][k] !== "*" &&
+                banned_id[i][k] !== user_id[j][k]
+              ) {
+                flag = false;
+                break;
+              }
+            }
+            if (flag) ban[i].push(user_id[j]);
+          }
+        }
+      }
+
+      let answer = [];
+
+      function DFS(idx, arr) {
+        if (idx === len) {
+          const tmp = [...arr].sort().join("");
+          if (!answer.includes(tmp)) answer.push(tmp);
+          return;
+        } else {
+          for (let i = 0; i < ban[idx].length; i++) {
+            if (!arr.includes(ban[idx][i])) {
+              arr.push(ban[idx][i]);
+              DFS(idx + 1, arr);
+              arr.pop();
+            }
+          }
+        }
+      }
+
+      DFS(0, []);
+      return answer.length;
+    }
+  </script>
+</html>
