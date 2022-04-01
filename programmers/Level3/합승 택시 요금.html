@@ -1,0 +1,41 @@
+<html>
+    <script>
+        function solution(n, s, a, b, fares) {
+
+            const move = Array.from({length: n}, () => new Array(n).fill(Infinity))
+            
+            move.forEach((v, i) => {
+                move[i][i] = 0
+            })
+            
+            for(let i = 0; i < fares.length; i++) {
+                const [x, y, z] = fares[i];
+                move[x-1][y-1] = z
+                move[y-1][x-1] = z
+            }
+                
+            
+            for(let i = 0; i < n; i++) {
+                for(let j = 0; j < n; j++) {
+                    for(let k = 0; k < n; k++) {
+                        if(move[j][k] > move[j][i] + move[i][k]) {
+                            move[j][k] = move[j][i] + move[i][k]
+                        }
+                    }
+                }
+            }
+            
+            const answer = []
+        
+            const candidate = move[s - 1].forEach((v, i) => {
+                if(v !== Infinity || s - 1 === i) {
+                    const endA = move[i][a-1]
+                    const endB = move[i][b-1]
+                    answer.push(endA + endB + v)
+                }
+            })
+            
+            return Math.min(...answer)
+        }
+    </script>
+</html>

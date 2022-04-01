@@ -1,0 +1,28 @@
+<html>
+  <script>
+    function solution(operations) {
+      const q = [];
+      let max = Number.MIN_SAFE_INTEGER;
+      let min = Number.MAX_SAFE_INTEGER;
+
+      for (let i = 0; i < operations.length; i++) {
+        if (operations[i] === "D 1") {
+          const idx = q.indexOf(max);
+          q.splice(idx, 1);
+          max = Math.max(...q);
+        } else if (operations[i] === "D -1") {
+          const idx = q.indexOf(min);
+          q.splice(idx, 1);
+          min = Math.min(...q);
+        } else {
+          const tmp = +operations[i].split(" ")[1];
+          if (tmp > max) max = tmp;
+          if (tmp < min) min = tmp;
+          q.push(tmp);
+        }
+      }
+      if (!q.length) return [0, 0];
+      else return [max, min];
+    }
+  </script>
+</html>
