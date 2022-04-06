@@ -1,0 +1,38 @@
+<html>
+  <script>
+    function solution(genres, plays) {
+      const obj = {};
+
+      for (let i = 0; i < genres.length; i++) {
+        if (obj[genres[i]] === undefined) {
+          obj[genres[i]] = [[plays[i], i]];
+        } else {
+          obj[genres[i]].push([plays[i], i]);
+        }
+      }
+
+      const tmp = [];
+
+      for (let [key, value] of Object.entries(obj)) {
+        value.sort((a, b) => {
+          if (a[0] > b[0]) return -1;
+          else if (a[0] < b[0]) return 1;
+          else {
+            if (a[1] > b[1]) return 1;
+            else return -1;
+          }
+        });
+
+        const sum = value.reduce((a, b) => a + b[0], 0);
+        if (value.length >= 2) tmp.push([sum, value[0][1], value[1][1]]);
+        else tmp.push([sum, value[0][1]]);
+      }
+      tmp.sort((a, b) => b[0] - a[0]);
+      const answer = [];
+      tmp.forEach(([s, ...v]) => {
+        answer.push(...v);
+      });
+      return answer;
+    }
+  </script>
+</html>
