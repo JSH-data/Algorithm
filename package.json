@@ -1,0 +1,22 @@
+{
+  "name": "algorithm",
+  "version": "1.0.0",
+  "description": "- 프로그래머스 알고리즘 문제를 JS로 풀어봅니다.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://JSH-data: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@github.com/JSH-data/Algorithm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JSH-data/Algorithm/issues"
+  },
+  "homepage": "https://github.com/JSH-data/Algorithm#readme",
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
