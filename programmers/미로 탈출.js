@@ -1,7 +1,9 @@
 function solution(maps) {    
     const lever = {};
+    
     const exit = {};
     const start = {};
+    
     const w = maps[1].length;
     const h = maps.length;
     
