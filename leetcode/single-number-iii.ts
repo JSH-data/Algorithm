@@ -1,13 +1,22 @@
 function singleNumber(nums: number[]): number[] {
-    const hash = {};
+    let sumXor = 0;
 
-    for(let i = 0; i < nums.length; i += 1) {
-        if(hash[nums[i]]) {
-            delete hash[nums[i]];
+    for(let x of nums) {
+        sumXor ^= x;
+    }
+
+    const rightMostBit = sumXor & -sumXor;
+
+    let a = 0;
+    let b = 0;
+
+    for(let x of nums) {
+        if(x & rightMostBit) {
+            a ^= x;
         } else {
-            hash[nums[i]] = true;
+            b ^= x;
         }
     }
 
-    return Object.keys(hash).map(v => Number(v))
+    return [a, b]
 };
