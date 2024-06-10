@@ -1,5 +1,5 @@
 function heightChecker(heights: number[]): number {
-    let answer = 0;
+    let answerNums = 0;
 
     const origin = [];
     const len = heights.length;
@@ -12,9 +12,9 @@ function heightChecker(heights: number[]): number {
 
     for(let i = 0; i < heights.length; i += 1) {
         if(origin[i] !== heights[i]) {
-            answer += 1;
+            answerNums += 1;
         }
     }
 
-    return answer;
+    return answerNums;
 };
