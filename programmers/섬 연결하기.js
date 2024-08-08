@@ -6,13 +6,6 @@ function getParent(x, arr) {
     return getParent(arr[x], arr);
 }
 
-function isCycle(x, y, arr) {
-    const xParent = getParent(x, arr);
-    const yParent = getParent(y, arr);
-    
-    return xParent === yParent
-}
-
 function updateParent(x, y, arr) {
     if(x > y) {
         arr[x] = y
