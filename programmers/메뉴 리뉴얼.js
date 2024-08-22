@@ -1,33 +1,45 @@
-function combination(str, target) {
-    const results = [];
+// function combination(str, target) {
+//     const results = [];
     
-    const len = str.length;
-    const strArr = str.split("");
-    const cases = 1 << len;
+//     const len = str.length;
+//     const strArr = str.split("");
+//     const cases = 1 << len;
     
-    for(let i = 1; i < cases; i += 1) {
-        let count = 0;
+//     for(let i = 1; i < cases; i += 1) {
+//         let count = 0;
         
-        for(let j = 0; j < len; j += 1) {
-            if(i & (1 << j)) {
-                count += 1;
-            }
-        }
+//         for(let j = 0; j < len; j += 1) {
+//             if(i & (1 << j)) {
+//                 count += 1;
+//             }
+//         }
         
-        if(count !== target) {
-            continue;
-        }
+//         if(count !== target) {
+//             continue;
+//         }
         
-        const com = strArr.filter((s, idx) => {
-            const binaryIdx = 1 << idx;
+//         const com = strArr.filter((s, idx) => {
+//             const binaryIdx = 1 << idx;
             
-            return i & binaryIdx;
-        }).sort().join("");
+//             return i & binaryIdx;
+//         }).sort().join("");
         
-        results.push(com);
-    };
+//         results.push(com);
+//     };
     
-    return results;
+//     return results;
+// }
+
+function combination(str, arr, target, lastIdx, results) {
+    if(arr.length === target) {
+        results.push(arr.sort().join(""));
+        
+        return;
+    }
+    
+    for(let i = lastIdx; i < str.length; i += 1) {
+        combination(str, [...arr, str[i]], target, i + 1, results);
+    }
 }
 
 function solution(orders, course) {
@@ -40,8 +52,10 @@ function solution(orders, course) {
             if(order < cNum) {
                 continue;
             }
+            const combinations = []
             
-            const combinations = combination(order, cNum);
+            combination(order, [], cNum, 0, combinations);
+            
             console.log(combinations)
             for(const com of combinations) {
                 if(!hash[com]) {
