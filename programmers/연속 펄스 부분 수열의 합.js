@@ -17,17 +17,17 @@ function solution(sequence) {
         }  
     }
     
-    if(min > 0) {
+    if(max > 0 && min > 0) {
         return max;
-    }
-    
-    if(max > 0 && min < 0) {
-        return max - min;
     }
     
     if(max < 0 && min < 0) {
         return -min;
     }
     
-    return Math.abs(max) + min
+    if(max > 0 && min < 0) {
+        return max - min;
+    }
+    
+    return max + min
 }
