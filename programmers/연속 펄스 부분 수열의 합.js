@@ -29,5 +29,5 @@ function solution(sequence) {
         return max - min;
     }
     
-    return max + min
+    return 0
 }
