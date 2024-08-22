@@ -23,7 +23,7 @@ function getNextTowns(town, weight, graph) {
 }
 
 function solution(n, road, k) {
-    const graph = Array.from({length: n + 1}, () => Array(n + 1).fill(500001));
+    const graph = Array.from({length: n + 1}, () => Array(n + 1).fill(Number.MAX_SAFE_INTEGER));
     
     for(const [x, y, w] of road) {
         if(graph[x][y] > w) {
