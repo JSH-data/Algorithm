@@ -1,51 +1,49 @@
-function solution(n) {
-    let answer = 0;
-    
-    const check = (x1, y1, x2, y2) => {
+function check(x1, y1, cache) {
+    let flag = true;
+
+    for(const [x2, y2] of cache) {
         if(y1 === y2) {
-            return false;
+            flag = false;
+            
+            break;
         }
         
         if(Math.abs(x1 - x2) === Math.abs(y1 - y2)) {
-            return false;
+            flag = false;
+            
+            break;
         }
-        
-        return true;
     }
     
-    const dfs = (row, selectedIdxs) => {
-        if(row === n) {
+    return flag;
+}
+
+function solution(n) {
+    let answer = 0;
+    
+    function dfs(height, cache) {
+        if(height === n) {
             answer += 1;
             
             return;
         }
         
-        for(let i = 0; i < n; i += 1) {
-            let flag = true;
+        for(let i = 1; i <= n; i += 1) {            
+            const isValid = check(height + 1, i, cache);
             
-            for(let j = 0; j < selectedIdxs.length; j += 1) {
-                const [x1, y1] = selectedIdxs[j];
-                const pass = check(x1, y1, row, i);
+            if(isValid) {
+                cache.push([height + 1, i]);
                 
-                if(!pass) {
-                    flag = false;
-                }
+                dfs(height + 1, cache);
                 
-            }
-                    
-            if(flag) {
-                selectedIdxs.push([row, i]);
-
-                dfs(row + 1, selectedIdxs);
-
-                selectedIdxs.pop();
+                cache.pop();
             }
         }
     }
     
-    for(let i = 0; i < n; i += 1) {
-        dfs(1, [[0, i]]);
+    for(let i = 1; i <= n; i += 1) {
+        dfs(1, [[1, i]]);
     }
     
-    return answer
+    return answer;
 }
