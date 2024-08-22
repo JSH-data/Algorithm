@@ -29,5 +29,5 @@ function solution(sequence) {
         return -min;
     }
     
-    return Math.abs(max) + Math.max(min)
+    return Math.abs(max) + min
 }
