@@ -1,16 +1,16 @@
 function solution(stones, k) {
-    const len = stones.length;
+    let mid = 0;
+    let left = 0;
+    let right = 200000000;
     
-    let s = 0;
-    let e = 200000000;
-    
-    while(s <= e) {
-        const mid = Math.floor((s + e) / 2);
+    while(left < right) {
+        mid = parseInt((left + right) / 2);
         
         let count = 0;
+        let max = 0;
         
-        for(let i = 0; i < len; i += 1) {
-            if(stones[i] - mid <= 0) {
+        for(let stone of stones) {
+            if(stone <= mid) {
                 count += 1;
             } else {
                 count = 0;
@@ -21,12 +21,12 @@ function solution(stones, k) {
             }
         }
         
-        if(count >= k) {
-            e = mid - 1;
+        if(count < k) {
+            left = mid + 1;   
         } else {
-            s = mid + 1;
+            right = mid;
         }
     }
     
-    return s
+    return left;
 }
