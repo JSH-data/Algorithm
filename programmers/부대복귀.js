@@ -1,34 +1,34 @@
 function solution(n, roads, sources, destination) {
-    const answer = [];
-    const paths = Array.from({length: n + 1}, () => []);
+    const rel = Array.from({length: n + 1}, (_, i) => []);
     
-    for(let [left, right] of roads) {
-        paths[left].push(right);
-        paths[right].push(left);
+    for(const [s, e] of roads) {
+        rel[s].push(e);
+        rel[e].push(s);
     }
     
-    const visited = Array.from({length: n + 1}, () => -1);
     const queue = [destination];
+    const visited = Array.from({length: n + 1}, () => -1);    
     
-    visited[destination] = 0;
+    visited[destination] = 0
     
     while(queue.length) {
-        const next = queue.shift();
+        const road = queue.shift();
         
-        for(let candidate of paths[next]) {
-            if(visited[candidate] === -1) {
-                visited[candidate] = visited[next] + 1;
+        for(const nextStep of rel[road]) {
+            if(visited[nextStep] === -1) {
+                visited[nextStep] = visited[road] + 1;
                 
-                queue.push(candidate);
+                queue.push(nextStep);
             }
         }
     }
     
-    for(let source of sources) {
+    const answer = [];
+    
+    for(const source of sources) {
         answer.push(visited[source]);
     }
     
     return answer;
 }
 
-// O(NlogN)
